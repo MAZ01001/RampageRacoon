@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour {
     [SerializeField][Tooltip("The in-game game over HUD")] private GameObject gameOver;
     //~ inspector (public)
     [Header("Player")]
-    [SerializeField][Tooltip("The player in scene")] public PlayerManager player;
+    [SerializeField][Tooltip("The player in scene")] public PlayerManager Player;
 
     //~ static (public)
     public static GameManager Instance { get; private set; }

@@ -8,8 +8,6 @@ public class PlayerManager : MonoBehaviour {
     private void Start() {
         //~ get components
         this.inputManager = this.GetComponent<InputManager>();
-        //~ add listener
-        this.inputManager.shoot.AddListener(PlayerShoots);
     }
     private void FixedUpdate() {
         // TODO player moves
