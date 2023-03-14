@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class ExitButton : MonoBehaviour
 {
-    public void button_exit()
+    public void ButtonExit()
     {
         Application.Quit();
     }
