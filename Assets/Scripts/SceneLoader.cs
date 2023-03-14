@@ -1,21 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
-public class SceneLoader : MonoBehaviour
-{
-    // Name der zu ladenden Szene (im Inspector einstellbar)
-    public string sceneName;
+public class SceneLoader : MonoBehaviour {
+    //~ inspector (private)
+    [SerializeField][Tooltip("Name of the next scene to load")] private string sceneName;
 
-    // Methode zum Laden der nächsten Szene bei Kollision
-    private void OnCollisionEnter(Collision other)
-    {
-        //Wichtig: Spieler muss Player Tag haben!!!!!
-        if (other.gameObject.CompareTag("Player"))
-        {
-            // Lade die nächste Szene
-            SceneManager.LoadScene(sceneName);
-        }
+    //~ unity methods (private)
+    private void OnCollisionEnter(Collision other) {
+        //~ if collision with the player loads the given scene
+        if(other.gameObject == GameManager.Instance.Player.gameObject) GameManager.LoadScene(sceneName);
     }
 }
