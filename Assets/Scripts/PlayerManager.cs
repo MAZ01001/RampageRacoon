@@ -56,11 +56,16 @@ public class PlayerManager : MonoBehaviour {
     [Tooltip("Animator of the Weapon Sprite")]
     private Animator weaponAnim;
 
+    [Header("Attacking")]
+    [SerializeField]
+    [Tooltip("Damage Done per Shot")]
+    private float damage;
     //~ private
     private InputManager inputManager;
     private Rigidbody2D rb;
     private Matrix2x2 shearMatrix = Matrix2x2.Identity;
     private Vector2 smoothVelocity = Vector3.zero;
+    private TrainingTarget enemyScript;
 
     //~ unity methods (private)
     private void OnDrawGizmosSelected() {
@@ -99,5 +104,19 @@ public class PlayerManager : MonoBehaviour {
         // this.inputManager.shoot;
 
         // TODO update animator values
+    }
+    //Fire the Weapon
+    public void Shoot()
+    {
+        Vector2 origin = this.transform.position; //Make this an empty at the tip of the gun preferrably :D
+        Vector2 direction = this.transform.right;
+        float maxDistance = 500f;
+        int layerMask = LayerMask.GetMask("Shootables"); //Enemies AND obstacles?
+        RaycastHit2D hitInfo = Physics2D.Raycast(origin, direction, maxDistance, layerMask);
+        if (hitInfo.collider?.gameObject is GameObject enemy)
+        {
+            enemyScript = enemy.GetComponent<TrainingTarget>();
+            enemyScript.Damage(damage);
+        }
     }
 }
