@@ -50,6 +50,12 @@ public class PlayerManager : MonoBehaviour {
     [SerializeField][Min(0f)][Tooltip("The smoothing factor of the player movement")]
     private float moveSmooth = 0.1f;
 
+    [Header("Animation")]
+
+    [SerializeField]
+    [Tooltip("Animator of the Weapon Sprite")]
+    private Animator weaponAnim;
+
     //~ private
     private InputManager inputManager;
     private Rigidbody2D rb;
@@ -86,6 +92,8 @@ public class PlayerManager : MonoBehaviour {
             ref this.smoothVelocity,
             this.moveSmooth
         );
+        if (this.inputManager.shoot == true) { weaponAnim.SetBool("Firing", true); }
+        else { weaponAnim.SetBool("Firing", false); }
 
         // TODO player shoots
         // this.inputManager.shoot;
