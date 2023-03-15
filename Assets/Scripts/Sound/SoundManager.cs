@@ -26,7 +26,6 @@ public class SoundManager : MonoBehaviour
     private void Start()
     {
         PlayMusic("Menu");
-        PlaySFX("Walk");
     }
 
     public void PlayMusic(string name)
