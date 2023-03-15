@@ -39,10 +39,14 @@ public class PlayerManager : MonoBehaviour {
     }
 
     //~ inspector (private)
+    [SerializeField][Tooltip("If the player is default facing to the right")]
+    private bool facingRight = true;
+
     [Header("Movement")]
 
-    [SerializeField][Range(-80f, 80f)][Tooltip("The angle of the shear effect to the Y axis for movement")]
-    private float yAxisShear = 30f;
+    //! removed from inspector
+    [HideInInspector][Range(-80f, 80f)][Tooltip("The angle of the shear effect to the Y axis for movement")]
+    private float yAxisShear = 0f;
 
     [SerializeField][Min(0f)][Tooltip("The movement speed of the player")]
     private float moveSpeed = 3f;
@@ -53,6 +57,7 @@ public class PlayerManager : MonoBehaviour {
     //~ private
     private InputManager inputManager;
     private Rigidbody2D rb;
+    private SpriteRenderer spriteRenderer;
     private Matrix2x2 shearMatrix = Matrix2x2.Identity;
     private Vector2 smoothVelocity = Vector3.zero;
 
@@ -60,6 +65,7 @@ public class PlayerManager : MonoBehaviour {
     private void OnDrawGizmosSelected() {
         //~ draw walking axis of player
         this.shearMatrix.SetPoint(Matrix2x2.Point.yx, Mathf.Tan(this.yAxisShear * Mathf.Deg2Rad));
+        this.shearMatrix.SetPoint(Matrix2x2.Point.yy, Mathf.Cos(this.yAxisShear * Mathf.Deg2Rad));
         //~ Y axis
         Gizmos.color = Color.blue;
         Gizmos.DrawRay(this.transform.position, (Vector3)this.shearMatrix.TransformVec2(Vector2.up));
@@ -71,8 +77,10 @@ public class PlayerManager : MonoBehaviour {
         //~ get components
         this.inputManager = this.GetComponent<InputManager>();
         this.rb = this.GetComponent<Rigidbody2D>();
+        this.spriteRenderer = this.GetComponent<SpriteRenderer>();
         //~ create shear matrix
         this.shearMatrix.SetPoint(Matrix2x2.Point.yx, Mathf.Tan(this.yAxisShear * Mathf.Deg2Rad));
+        this.shearMatrix.SetPoint(Matrix2x2.Point.yy, Mathf.Cos(this.yAxisShear * Mathf.Deg2Rad));
     }
     private void FixedUpdate() {
         //~ move
@@ -86,6 +94,9 @@ public class PlayerManager : MonoBehaviour {
             ref this.smoothVelocity,
             this.moveSmooth
         );
+        //~ player facing direction (only change while moving)
+        if(moveDir.x > 0.1f) this.spriteRenderer.flipX = !this.facingRight;
+        else if(moveDir.x < -0.1f) this.spriteRenderer.flipX = this.facingRight;
 
         // TODO player shoots
         // this.inputManager.shoot;
