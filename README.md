@@ -5,7 +5,7 @@ A 2D game in the Unity game engine
 ## Description
 
 >
-> You play as a raccoon and shoot flowers to share the joy,
+> You play as a (drugged) raccoon and throw flowers to share the joy,
 > but watch out because fewer pills and you might get aware of what's actually happening to those around you.
 >
 
