@@ -61,8 +61,9 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public void TakeDamage(int damage)
+    public void Damage(int damage)
     {
+        Debug.Log("ouch");
         currentHealth -= damage;
         anim.Play("Damage", 0, 0f);
 

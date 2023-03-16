@@ -20,7 +20,6 @@ public class ChangeSecTexAnim : MonoBehaviour
     // Update is called once per frame
     void CycleTex()
     {
-        Debug.Log(index);
         material.SetTexture("_SecTex", sprites[index].texture);
         index = (index + 1) % sprites.Length;
     }
