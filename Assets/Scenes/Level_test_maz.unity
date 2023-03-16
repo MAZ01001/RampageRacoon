@@ -573,13 +573,13 @@ MonoBehaviour:
     sharedMaterial: {fileID: 2100000, guid: ea64f810c3638a04ab478292d96ca0ee, type: 2}
   foregroundSprites:
   - randomWeigth: 1
-    prefab: {fileID: 0}
+    prefab: {fileID: 2407976225857183216, guid: 1a5d2ce5c6663434092bfa4dc3fc8fdc, type: 3}
   - randomWeigth: 0.75
-    prefab: {fileID: 0}
+    prefab: {fileID: 4479998412452278986, guid: f9a5bd983f1e37b46b7f8e976dcfe8b4, type: 3}
   - randomWeigth: 0.5
-    prefab: {fileID: 0}
+    prefab: {fileID: 2679462588350221018, guid: 01ddbbea5efe8f442a4d09e79ccf37f1, type: 3}
   - randomWeigth: 0.25
-    prefab: {fileID: 0}
+    prefab: {fileID: 3807085692704244310, guid: 293e3234021c07a4d86da6758aa6eb0b, type: 3}
 --- !u!1 &1476910950
 GameObject:
   m_ObjectHideFlags: 0
