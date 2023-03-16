@@ -56,10 +56,18 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    public void ToggleMasterVolume()
+    public void ToggleMasterVolume(bool isOn)
     {
-        musicSource.mute=! musicSource.mute;
-        sfxSource.mute=! sfxSource.mute;
+        if(isOn)
+        {
+            musicSource.mute=false;
+            sfxSource.mute=false;    
+        }
+        else if(!isOn)
+        {
+            musicSource.mute=true;
+            sfxSource.mute=true;
+        }
     }
 
     public void MasterVolume(float volumeMusic, float volumeSFX, float volumeMaster)
