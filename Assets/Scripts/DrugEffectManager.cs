@@ -4,35 +4,44 @@ using UnityEngine.SceneManagement;
 
 public class DrugEffectManager : MonoBehaviour
 {
-    // Anzahl Sekunden, die der Timer abzählt
-    public float maxTime;
+    [SerializeField]
+    [Tooltip("Anzahl Sekunden, die der Timer abzählt")]
+    private float maxTime;
 
-    // Slider zur Anzeige des Timers
-    public Slider timerSlider;
+    [SerializeField]
+    [Tooltip("Slider zur Anzeige des Timers")]
+    private Slider timerSlider;
 
-    // Countdown-Timer
+    [SerializeField]
+    [Tooltip("Blend% zwischen den welten")]
+    private BlendSlider blendSlider;
+
     private float timer;
 
     //Start Timer  Druffianzeige
     private void Start()
     {
-        // Setzt Wert des Sliders auf max Anzahl Sekunden
-        timerSlider.maxValue = maxTime;
-        timerSlider.value = maxTime;
+        // Setzt den Slider zurück auf voll
+        timerSlider.value = 1;
 
         // Setzt Timer auf max Zeit
         timer = maxTime;
+
+
     }
 
     //Aktualisierung der Timer-Anzeige
-    private void Update()
+    private void FixedUpdate()
     {
-        
-        timer -= Time.deltaTime;
-
-        // Aktualisiert Anzeige Timer (Slider)
-        timerSlider.value = timer;
-
+        timer -= Time.fixedDeltaTime;
+        float t = timer / maxTime;
+        if (t > 0)
+        {
+            blendSlider.BlendEnvironment(t < 0.5 ? 2 * t * t : 1 - Mathf.Pow(-2 * t + 2, 2) / 2); // Sqr EaseInOut Timer
+            //blendSlider.BlendEnvironment(t); //Linear Timer
+            // Aktualisiert Anzeige Timer (Slider)
+            timerSlider.value = timer / maxTime;
+        }
         //Timer abgelaufen?
         if (timer <= 0)
         {
