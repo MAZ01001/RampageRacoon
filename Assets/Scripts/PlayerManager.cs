@@ -63,14 +63,14 @@ public class PlayerManager : MonoBehaviour {
     [Header("Attacking")]
     [SerializeField]
     [Tooltip("Damage Done per Shot")]
-    private float damage;
+    private int damage;
     //~ private
     private InputManager inputManager;
     private Rigidbody2D rb;
     private SpriteRenderer spriteRenderer;
     private Matrix2x2 shearMatrix = Matrix2x2.Identity;
     private Vector2 smoothVelocity = Vector3.zero;
-    private TrainingTarget enemyScript;
+    private Enemy enemyScript;
 
     //~ unity methods (private)
     private void OnDrawGizmosSelected() {
@@ -115,17 +115,28 @@ public class PlayerManager : MonoBehaviour {
         //~ update animator values
         weaponAnim.SetBool("Firing", this.inputManager.shoot);
     }
+    public bool RotateGun()
+    {
+        bool flipX = true;
+        if (rb.velocity.x > 0.1f) flipX = !this.facingRight;
+        else if (rb.velocity.x < -0.1f) flipX = this.facingRight;
+        return flipX;
+    }
     //Fire the Weapon
     public void Shoot()
     {
+        Debug.Log("Bang");
         Vector2 origin = this.transform.position; //Make this an empty at the tip of the gun preferrably :D
         Vector2 direction = this.transform.right;
+        if (rb.velocity.x > 0.1f) direction = this.transform.right;
+        else if (rb.velocity.x < -0.1f) direction = this.transform.right*-1;
         float maxDistance = 500f;
         int layerMask = LayerMask.GetMask("Shootables"); //Enemies AND obstacles?
         RaycastHit2D hitInfo = Physics2D.Raycast(origin, direction, maxDistance, layerMask);
         if (hitInfo.collider?.gameObject is GameObject enemy)
         {
-            enemyScript = enemy.GetComponent<TrainingTarget>();
+            Debug.Log("hit");
+            enemyScript = enemy.GetComponent<Enemy>();
             enemyScript.Damage(damage);
         }
     }
