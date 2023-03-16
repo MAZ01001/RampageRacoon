@@ -18,12 +18,12 @@ public class EventUp : MonoBehaviour
     private void Update()
     {
         shouldFlip = playerManager.RotateGun();
-        if (shouldFlip == false)
+        if (shouldFlip == true)
         {
             sprite.flipX = true;
             this.transform.rotation = Quaternion.Euler(0,0,42);
         }
-        if (shouldFlip == true)
+        if (shouldFlip == false)
         {
             sprite.flipX = false;
             this.transform.rotation = Quaternion.Euler(0, 0, -42);

@@ -65,6 +65,7 @@ public class PlayerManager : MonoBehaviour {
     [Tooltip("Damage Done per Shot")]
     private int damage;
     //~ private
+    private Animator anim;
     private InputManager inputManager;
     private Rigidbody2D rb;
     private SpriteRenderer spriteRenderer;
@@ -89,13 +90,16 @@ public class PlayerManager : MonoBehaviour {
         this.inputManager = this.GetComponent<InputManager>();
         this.rb = this.GetComponent<Rigidbody2D>();
         this.spriteRenderer = this.GetComponent<SpriteRenderer>();
+        this.anim = this.GetComponent<Animator>();
         //~ create shear matrix
         this.shearMatrix.SetPoint(Matrix2x2.Point.yx, Mathf.Tan(this.yAxisShear * Mathf.Deg2Rad));
         this.shearMatrix.SetPoint(Matrix2x2.Point.yy, Mathf.Cos(this.yAxisShear * Mathf.Deg2Rad));
     }
     private void FixedUpdate() {
         //~ move
-        Vector2 moveDir = this.inputManager.move.sqrMagnitude >= 0.01f
+        bool isMoving = this.inputManager.move.sqrMagnitude >= 0.01f;
+        anim.SetBool("Moving", isMoving);
+        Vector2 moveDir = isMoving
             ? this.shearMatrix.TransformVec2(this.inputManager.move)
             : Vector2.zero;
         Vector2 moveDirSpeed = moveDir * this.moveSpeed;
@@ -117,10 +121,7 @@ public class PlayerManager : MonoBehaviour {
     }
     public bool RotateGun()
     {
-        bool flipX = true;
-        if (rb.velocity.x > 0.1f) flipX = !this.facingRight;
-        else if (rb.velocity.x < -0.1f) flipX = this.facingRight;
-        return flipX;
+        return this.spriteRenderer.flipX == this.facingRight;
     }
     //Fire the Weapon
     public void Shoot()

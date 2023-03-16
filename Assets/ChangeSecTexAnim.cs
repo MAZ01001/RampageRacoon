@@ -11,13 +11,7 @@ public class ChangeSecTexAnim : MonoBehaviour
     [SerializeField]
     private Material material;
     private int index = 0;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
     void CycleTex()
     {
         material.SetTexture("_SecTex", sprites[index].texture);
@@ -26,5 +20,9 @@ public class ChangeSecTexAnim : MonoBehaviour
     void DefaultTex()
     {
         material.SetTexture("_SecTex", defaultSprite.texture);
+    }
+    void StartCycle()
+    {
+        index = 0;
     }
 }
