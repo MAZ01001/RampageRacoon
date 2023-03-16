@@ -5,7 +5,19 @@ public class BackgroundGenerator : MonoBehaviour {
     [System.Serializable]
     private class WeightedRandom{
         [Range(0f, 1f)][Tooltip("The weight of this sprite for random generation")]
-        public float randomWeigth;
+        public float randomWeigth = 1f;
+
+        [Tooltip("[Inspector] Only to show what the actual percentage is")]
+        public float actualPercent = 0f;
+
+        /// <summary> Sort a <see cref="WeightedRandom"/> list (ascending) </summary>
+        /// <param name="weightList"> The <see cref="WeightedRandom"/> list to sort (ascending) </param>
+        public static void SortWeightList(in WeightedRandom[] weightList){
+            System.Array.Sort<WeightedRandom>(
+                weightList,
+                (WeightedRandom a, WeightedRandom b) => a.randomWeigth.CompareTo(b.randomWeigth)
+            );
+        }
     }
     [System.Serializable]
     private class BackgroundSpriteSpawn : WeightedRandom{
@@ -37,6 +49,7 @@ public class BackgroundGenerator : MonoBehaviour {
     private GameObject backgroundSpritePrefab;
 
     [SerializeField][Tooltip("The different backgrounds for spawning")]
+    [ContextMenuItem(">> Sort background sprite list", "InspectorSortBackgroundSprites")]
     private BackgroundSpriteSpawn[] backgroundSprites;
 
     [Header("-- Foreground --")]
@@ -44,6 +57,7 @@ public class BackgroundGenerator : MonoBehaviour {
     private int foregroundCount;
 
     [SerializeField][Tooltip("The different foregrounds for spawning")]
+    [ContextMenuItem(">> Sort foreground sprite list", "InspectorSortForegroundSprites")]
     private ForegroundSpriteSpawn[] foregroundSprites;
 
     //~ private
@@ -74,23 +88,33 @@ public class BackgroundGenerator : MonoBehaviour {
     private void Start() {
         if(this.backgroundSprites.Length == 0) return;
         this.backgroundSize = (Vector2)this.backgroundSprites[0].texture.bounds.size;
+        //~ save random state
         Random.State rState = Random.state;
         Random.InitState(this.randomSeed);
         //~ generate backgrounds
         GameObject emptyParent = new GameObject("Background");
         emptyParent.transform.SetParent(this.transform);
         emptyParent.transform.localPosition = Vector3.zero;
+        WeightedRandom.SortWeightList(this.backgroundSprites);
         Vector2 pos = Vector2.left
             * this.backgroundSize.x
             * (this.backgroundCount - 1)
             * 0.5f;
         for(int i = 0; i < this.backgroundCount; i++){
+            //~ spawn (empty) background sprite prefab
             GameObject background = Object.Instantiate<GameObject>(this.backgroundSpritePrefab, emptyParent.transform);
             background.transform.position = pos;
             SpriteRenderer spriteRenderer = background.GetComponent<SpriteRenderer>();
             //~ get random texture and material
             if(this.backgroundSprites.Length > 0){
-                int index = this.GetRandomIndexWeighted(this.backgroundSprites);
+                //~ get random index
+                float rValue = Random.value;
+                int index = System.Array.FindIndex<WeightedRandom>(
+                    this.backgroundSprites,
+                    backgroundSprite => rValue <= backgroundSprite.randomWeigth
+                );
+                if(index == -1) index = this.backgroundSprites.Length - 1;
+                //~ set texture and material
                 spriteRenderer.sprite = this.backgroundSprites[index].texture;
                 spriteRenderer.sharedMaterial = this.backgroundSprites[index].sharedMaterial;
             }
@@ -125,38 +149,50 @@ public class BackgroundGenerator : MonoBehaviour {
             emptyParent = new GameObject("Foreground");
             emptyParent.transform.SetParent(this.transform);
             emptyParent.transform.localPosition = Vector3.zero;
+            WeightedRandom.SortWeightList(this.foregroundSprites);
             for(int i = 0; i < this.foregroundCount; i++){
                 pos = new Vector2(
                     Random.Range(this.spawnAreaMin.x, this.spawnAreaMax.x),
                     Random.Range(this.spawnAreaMin.y, this.spawnAreaMax.y)
                 );
+                //~ get random index
+                float rValue = Random.value;
+                int index = System.Array.FindIndex<WeightedRandom>(
+                    this.foregroundSprites,
+                    foregroundSprite => rValue <= foregroundSprite.randomWeigth
+                );
+                if(index == -1) index = this.foregroundSprites.Length - 1;
                 //~ spawn random prefab
-                int index = this.GetRandomIndexWeighted(this.foregroundSprites);
                 GameObject sprite = Object.Instantiate<GameObject>(this.foregroundSprites[index].prefab, emptyParent.transform);
                 sprite.transform.position = pos;
             }
         }
+        //~ restore random state
         Random.state = rState;
     }
 
-    //~ private methods
-    /// <summary> Gives an index from the given <see cref="weightedList"/> </summary>
-    /// <param name="weightedList"> The list of different <see cref="WeightedRandom"/> </param>
-    /// <returns> A random index in the <see cref="weightedList"/> </returns>
-    private int GetRandomIndexWeighted(in WeightedRandom[] weightedList){
-        // TODO replace with new random system
-        int index = 0;
-        float rValue = Random.value;
-        for(int i = weightedList.Length - 1; i > 0; i--){
-            if(rValue <= weightedList[i].randomWeigth){
-                index = i;
-                break;
-            }
+#if UNITY_EDITOR
+    private void OnValidate() {
+        //~ calculate the actual percentage (backgroundSprites)
+        float largestWeight = 0f;
+        for(int i = 0; i < this.backgroundSprites.Length; i++){
+            this.backgroundSprites[i].actualPercent = Mathf.Clamp01(this.backgroundSprites[i].randomWeigth - largestWeight);
+            if(this.backgroundSprites[i].randomWeigth > largestWeight) largestWeight = this.backgroundSprites[i].randomWeigth;
         }
-        return index;
+        //~ calculate the actual percentage (foregroundSprites)
+        largestWeight = 0f;
+        for(int i = 0; i < this.foregroundSprites.Length; i++){
+            this.foregroundSprites[i].actualPercent = Mathf.Clamp01(this.foregroundSprites[i].randomWeigth - largestWeight);
+            if(this.foregroundSprites[i].randomWeigth > largestWeight) largestWeight = this.foregroundSprites[i].randomWeigth;
+        }
     }
 
-#if UNITY_EDITOR
+    /// <summary> [Inspector] Sort the <see cref="backgroundSprites"/> Array </summary>
+    private void InspectorSortBackgroundSprites() => WeightedRandom.SortWeightList(this.backgroundSprites);
+
+    /// <summary> [Inspector] Sort the <see cref="foregroundSprites"/> Array </summary>
+    private void InspectorSortForegroundSprites() => WeightedRandom.SortWeightList(this.foregroundSprites);
+
     /// <summary> [Inspector] Generate Environment once </summary>
     [ContextMenu(">> Run once")]
     private void InspectorRunOnce(){
