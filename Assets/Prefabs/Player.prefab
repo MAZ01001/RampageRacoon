@@ -104,6 +104,7 @@ GameObject:
   - component: {fileID: 5735078966269882288}
   - component: {fileID: 77592671738118720}
   - component: {fileID: 1839308979681552548}
+  - component: {fileID: 7194573575461331274}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -148,7 +149,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 07de29ea746fd63469a44c45e599c2d2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -169,12 +170,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 770397701, guid: 275cd31e0c503ca46bae85e96597d83d, type: 3}
+  m_Sprite: {fileID: -553403160, guid: 31a11c6f4e1fd7a4b984f693e397c80c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 2}
+  m_Size: {x: 10, y: 10}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -190,7 +191,7 @@ Animator:
   m_GameObject: {fileID: 5735078966269882293}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 0fd81e7dbe7b20d48a01e1ee83dd945b, type: 2}
+  m_Controller: {fileID: 9100000, guid: c7b925acef6b8b94996f2f90c6f479ab, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -296,6 +297,23 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
+--- !u!114 &7194573575461331274
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5735078966269882293}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cc4f600e11aa6e498fc9b0d381608a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultSprite: {fileID: 722854554, guid: b28fc79262531294fa5e81935612e374, type: 3}
+  sprites:
+  - {fileID: 722854554, guid: b28fc79262531294fa5e81935612e374, type: 3}
+  - {fileID: -998312521, guid: b28fc79262531294fa5e81935612e374, type: 3}
+  material: {fileID: 2100000, guid: 07de29ea746fd63469a44c45e599c2d2, type: 2}
 --- !u!1 &8272792334990992986
 GameObject:
   m_ObjectHideFlags: 0
