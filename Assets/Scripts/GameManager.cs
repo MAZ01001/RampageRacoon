@@ -4,7 +4,8 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour {
     //~ inspector (private)
     [Header("HUDs")]
-    [SerializeField][Tooltip("The in-game local menu HUD")] private GameObject localMenu;
+    [SerializeField][Tooltip("The in-game menu HUD")] private GameObject pauseMenu;
+    [SerializeField][Tooltip("The in-game settings HUD")] private GameObject menuSettings;
     [SerializeField][Tooltip("The in-game game over HUD")] private GameObject gameOver;
     //~ inspector (public)
     [Header("Player")]
@@ -24,15 +25,16 @@ public class GameManager : MonoBehaviour {
     }
 
     //~ public methods
-    /// <summary> Toggle <see cref="localMenu"/> (in-game HUD) and freeze/unfreeze time </summary>
+    /// <summary> Toggle <see cref="pauseMenu"/> (in-game HUD) and freeze/unfreeze time </summary>
     public void Menu() {
-        GameManager.CursorLock(this.localMenu.activeSelf);
-        GameManager.PauseTime(!this.localMenu.activeSelf);
-        this.localMenu.SetActive(!this.localMenu.activeSelf);
+        if(this.menuSettings.activeSelf) this.menuSettings.SetActive(false);
+        else{
+            GameManager.PauseTime(!this.pauseMenu.activeSelf);
+            this.pauseMenu.SetActive(!this.pauseMenu.activeSelf);
+        }
     }
     /// <summary> Activates <see cref="gameover"/> (in-game HUD) and freezes time </summary>
     public void GameOver() {
-        GameManager.CursorLock(false);
         GameManager.PauseTime(true);
         this.gameOver.SetActive(true);
     }

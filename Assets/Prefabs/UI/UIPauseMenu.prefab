@@ -1020,7 +1020,7 @@ GameObject:
   - component: {fileID: 7266353858687969739}
   - component: {fileID: 7266353858687969736}
   m_Layer: 5
-  m_Name: UIMenu
+  m_Name: UIPauseMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1069,7 +1069,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 0.34901962, g: 0.34901962, b: 0.34901962, a: 0.9019608}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
