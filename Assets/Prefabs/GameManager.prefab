@@ -45,6 +45,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localMenu: {fileID: 0}
-  gameEnd: {fileID: 0}
-  player: {fileID: 0}
-  inputManager: {fileID: 0}
+  gameOver: {fileID: 0}
+  Player: {fileID: 0}
