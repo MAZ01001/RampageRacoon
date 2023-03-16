@@ -74,11 +74,12 @@ public class PercentageCalc : MonoBehaviour
     {
         backgroundSpriteWeightRangeStart = new float[backgroundSprites.Length];
         backgroundSpriteWeightRangeEnd = new float[backgroundSprites.Length];
-        PercentageCalculation();
+        BackgroundSpritesPercentageCalculation();
     }
-    private void PercentageCalculation()
+    private void BackgroundSpritesPercentageCalculation()
     {
         float totalWeight = 0;
+        //Add the weight value of all sprites together
         foreach (SpriteSpawn backgroundSprite in backgroundSprites)
         {
             totalWeight += backgroundSprite.randomWeigth;
@@ -86,21 +87,22 @@ public class PercentageCalc : MonoBehaviour
         }
         if (totalWeight > 1)
         {
+            //If weight is over throw exception into console and stop calculations
             Debug.LogException(new System.Exception("randomWeigth Total over 100%"));
         }
+        //Map the weight to Ranges after one another to prevent overlaps use index to determine the related backgroundSprite
         else
         {
             int index = 0;
             float lastMax = 0f;
             foreach (SpriteSpawn backgroundSprite in backgroundSprites)
             {
-                Debug.Log(index);
                 backgroundSpriteWeightRangeStart[index] = lastMax;
                 backgroundSpriteWeightRangeEnd[index] = lastMax + backgroundSprite.randomWeigth;
                 lastMax = backgroundSprite.randomWeigth;
                 Debug.Log(backgroundSpriteWeightRangeStart[index] + " ; " + backgroundSpriteWeightRangeEnd[index]);
                 index += 1;
-            }
+            } 
         }
     }
 }

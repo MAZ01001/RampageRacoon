@@ -22,22 +22,26 @@ public class BackgroundGenerator : MonoBehaviour {
     }
 
     //~ inspector (private)
-    [Header("General")]
+    [Header("-- General --")]
     [SerializeField][Tooltip("The random seed for the environment generation")]
     private int randomSeed;
+
+    [Header("-- Background --")]
+    [SerializeField][Tooltip("The start of the ground (from the top) in the background image")]
+    private float groundYstart;
 
     [SerializeField][Tooltip("The amount of backgrounds for the environment to generate")]
     private int backgroundCount;
 
-    [SerializeField][Tooltip("The start of the ground (from the top) in the background image")]
-    private float groundYstart;
-
-    [Header("Background")]
     [SerializeField][Tooltip("The prefab for spawning background sprites")]
     private GameObject backgroundSpritePrefab;
 
     [SerializeField][Tooltip("The different backgrounds for spawning")]
     private BackgroundSpriteSpawn[] backgroundSprites;
+
+    [Header("-- Foreground --")]
+    [SerializeField][Tooltip("The amount of foreground props to generate")]
+    private int foregroundCount;
 
     [SerializeField][Tooltip("The different foregrounds for spawning")]
     private ForegroundSpriteSpawn[] foregroundSprites;
@@ -93,42 +97,47 @@ public class BackgroundGenerator : MonoBehaviour {
             spriteRenderer.sortingOrder = -10;
             pos += Vector2.right * this.backgroundSize.x;
         }
-        //~ generate colliders
-        // TODO create bounds for spawning area (vec2 min, vec2 max)
-        // this.spawnAreaMin;
-        // this.spawnAreaMax;
+        //~ calculate spawn area and generate colliders
+        this.spawnAreaMin = (Vector2)this.transform.position
+            + Vector2.down * (this.backgroundSize.y * 0.5f)
+            + Vector2.left * (this.backgroundSize.x * (float)(this.backgroundCount - 1) * 0.5f - 0.5f);
+        this.spawnAreaMax = (Vector2)this.transform.position
+            + Vector2.up * this.groundYstart
+            + Vector2.right * (this.backgroundSize.x * (float)(this.backgroundCount - 1) * 0.5f - 0.5f);
         //~ >> top border
         BoxCollider2D box = emptyParent.AddComponent<BoxCollider2D>();
-        box.offset = (Vector2)this.transform.position + Vector2.up * (this.groundYstart + 0.5f);
+        box.offset = Vector2.up * (this.spawnAreaMax.y + 0.5f);
         box.size = new Vector2(this.backgroundSize.x * (float)(this.backgroundCount - 1) * 1.1f, 1f);
         //~ >> bottom border
         box = emptyParent.AddComponent<BoxCollider2D>();
-        box.offset = (Vector2)this.transform.position + Vector2.down * (this.backgroundSize.y * 0.5f + 0.5f);
+        box.offset = Vector2.up * (this.spawnAreaMin.y - 0.5f);
         box.size = new Vector2(this.backgroundSize.x * (float)(this.backgroundCount - 1) * 1.1f, 1f);
         //~ >> left border
         box = emptyParent.AddComponent<BoxCollider2D>();
-        box.offset = (Vector2)this.transform.position + Vector2.left * this.backgroundSize.x * (float)(this.backgroundCount - 1) * 0.5f;
+        box.offset = Vector2.right * (this.spawnAreaMin.x - 0.5f);
         box.size = new Vector2(1f, this.backgroundSize.y * 1.1f);
         //~ >> right border
         box = emptyParent.AddComponent<BoxCollider2D>();
-        box.offset = (Vector2)this.transform.position + Vector2.right * this.backgroundSize.x * (float)(this.backgroundCount - 1) * 0.5f;
+        box.offset = Vector2.right * (this.spawnAreaMax.x + 0.5f);
         box.size = new Vector2(1f, this.backgroundSize.y * 1.1f);
-        //~ generate props
+        //~ generate foreground props
         if(this.foregroundSprites.Length > 0){
             emptyParent = new GameObject("Foreground");
             emptyParent.transform.SetParent(this.transform);
             emptyParent.transform.localPosition = Vector3.zero;
-            pos = Vector2.zero;
-            // TODO loop
-            //~ spawn random prefab
-            int index = this.GetRandomIndexWeighted(this.foregroundSprites);
-            GameObject sprite = Object.Instantiate<GameObject>(this.foregroundSprites[index].prefab, emptyParent.transform);
-            sprite.transform.position = pos;
-            // TODO
+            for(int i = 0; i < this.foregroundCount; i++){
+                pos = new Vector2(
+                    Random.Range(this.spawnAreaMin.x, this.spawnAreaMax.x),
+                    Random.Range(this.spawnAreaMin.y, this.spawnAreaMax.y)
+                );
+                //~ spawn random prefab
+                int index = this.GetRandomIndexWeighted(this.foregroundSprites);
+                GameObject sprite = Object.Instantiate<GameObject>(this.foregroundSprites[index].prefab, emptyParent.transform);
+                sprite.transform.position = pos;
+            }
         }
         Random.state = rState;
     }
-
 
     //~ private methods
     /// <summary> Gives an index from the given <see cref="weightedList"/> </summary>
@@ -151,7 +160,6 @@ public class BackgroundGenerator : MonoBehaviour {
     /// <summary> [Inspector] Generate Environment once </summary>
     [ContextMenu(">> Run once")]
     private void InspectorRunOnce(){
-        this.InspectorDestroy2DBoxColliders();
         this.InspectorDestroyChildElements();
         this.Start();
     }
@@ -161,13 +169,6 @@ public class BackgroundGenerator : MonoBehaviour {
     private void InspectorDestroyChildElements(){
         for(int i = this.transform.childCount - 1; i >= 0; i--)
             GameObject.DestroyImmediate(this.transform.GetChild(i).gameObject);
-    }
-
-    /// <summary> [Inspector] Destroy all 2D box collider components </summary>
-    [ContextMenu(">> Remove 2D box colliders")]
-    private void InspectorDestroy2DBoxColliders(){
-        foreach(Component boxCollider2DComponent in this.gameObject.GetComponents<BoxCollider2D>())
-            GameObject.DestroyImmediate(boxCollider2DComponent);
     }
 #endif
 }
