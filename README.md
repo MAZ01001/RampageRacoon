@@ -1,4 +1,4 @@
-# Mafia Bear
+# Rampage Racoon
 
 A 2D game in the Unity game engine
 
