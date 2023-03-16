@@ -3,15 +3,22 @@ using UnityEngine;
 public class BackgroundGenerator : MonoBehaviour {
     //~ custom datatype (private)
     [System.Serializable]
-    private struct SpriteSpawn{
+    private class WeightedRandom{
+        [Range(0f, 1f)][Tooltip("The weight of this sprite for random generation")]
+        public float randomWeigth;
+    }
+    [System.Serializable]
+    private class BackgroundSpriteSpawn : WeightedRandom{
         [Tooltip("The sprite texture")]
         public Sprite texture;
 
         [Tooltip("The sprite material for blending")]
         public Material sharedMaterial;
-
-        [Range(0f, 1f)][Tooltip("The weight of this sprite for random generation")]
-        public float randomWeigth;
+    }
+    [System.Serializable]
+    private class ForegroundSpriteSpawn : WeightedRandom{
+        [Tooltip("The sprite prefab")]
+        public GameObject prefab;
     }
 
     //~ inspector (private)
@@ -25,18 +32,20 @@ public class BackgroundGenerator : MonoBehaviour {
     [SerializeField][Tooltip("The start of the ground (from the top) in the background image")]
     private float groundYstart;
 
-    [Header("# Sprite generation")]
-    [SerializeField][Tooltip("The prefab for spawning sprites")]
-    private GameObject spritePrefab;
+    [Header("Background")]
+    [SerializeField][Tooltip("The prefab for spawning background sprites")]
+    private GameObject backgroundSpritePrefab;
 
     [SerializeField][Tooltip("The different backgrounds for spawning")]
-    private SpriteSpawn[] backgroundSprites;
+    private BackgroundSpriteSpawn[] backgroundSprites;
 
     [SerializeField][Tooltip("The different foregrounds for spawning")]
-    private SpriteSpawn[] foregroundSprites;
+    private ForegroundSpriteSpawn[] foregroundSprites;
 
     //~ private
-    private Vector2 backgroundSize;
+    private Vector2 backgroundSize = Vector2.zero;
+    private Vector2 spawnAreaMin = Vector2.zero;
+    private Vector2 spawnAreaMax = Vector2.zero;
 
     //~ unity methods (private)
     private void OnDrawGizmosSelected() {
@@ -64,70 +73,78 @@ public class BackgroundGenerator : MonoBehaviour {
         Random.State rState = Random.state;
         Random.InitState(this.randomSeed);
         //~ generate backgrounds
+        GameObject emptyParent = new GameObject("Background");
+        emptyParent.transform.SetParent(this.transform);
+        emptyParent.transform.localPosition = Vector3.zero;
         Vector2 pos = Vector2.left
             * this.backgroundSize.x
             * (this.backgroundCount - 1)
             * 0.5f;
         for(int i = 0; i < this.backgroundCount; i++){
-            GameObject background = Object.Instantiate<GameObject>(this.spritePrefab, this.transform);
+            GameObject background = Object.Instantiate<GameObject>(this.backgroundSpritePrefab, emptyParent.transform);
             background.transform.position = pos;
             SpriteRenderer spriteRenderer = background.GetComponent<SpriteRenderer>();
-            this.SetSpriteRandomImgMaterial(ref spriteRenderer, this.backgroundSprites);
+            //~ get random texture and material
+            if(this.backgroundSprites.Length > 0){
+                int index = this.GetRandomIndexWeighted(this.backgroundSprites);
+                spriteRenderer.sprite = this.backgroundSprites[index].texture;
+                spriteRenderer.sharedMaterial = this.backgroundSprites[index].sharedMaterial;
+            }
             spriteRenderer.sortingOrder = -10;
             pos += Vector2.right * this.backgroundSize.x;
         }
         //~ generate colliders
+        // TODO create bounds for spawning area (vec2 min, vec2 max)
+        // this.spawnAreaMin;
+        // this.spawnAreaMax;
         //~ >> top border
-        BoxCollider2D box = this.gameObject.AddComponent<BoxCollider2D>();
+        BoxCollider2D box = emptyParent.AddComponent<BoxCollider2D>();
         box.offset = (Vector2)this.transform.position + Vector2.up * (this.groundYstart + 0.5f);
         box.size = new Vector2(this.backgroundSize.x * (float)(this.backgroundCount - 1) * 1.1f, 1f);
         //~ >> bottom border
-        box = this.gameObject.AddComponent<BoxCollider2D>();
+        box = emptyParent.AddComponent<BoxCollider2D>();
         box.offset = (Vector2)this.transform.position + Vector2.down * (this.backgroundSize.y * 0.5f + 0.5f);
         box.size = new Vector2(this.backgroundSize.x * (float)(this.backgroundCount - 1) * 1.1f, 1f);
         //~ >> left border
-        box = this.gameObject.AddComponent<BoxCollider2D>();
+        box = emptyParent.AddComponent<BoxCollider2D>();
         box.offset = (Vector2)this.transform.position + Vector2.left * this.backgroundSize.x * (float)(this.backgroundCount - 1) * 0.5f;
         box.size = new Vector2(1f, this.backgroundSize.y * 1.1f);
         //~ >> right border
-        box = this.gameObject.AddComponent<BoxCollider2D>();
+        box = emptyParent.AddComponent<BoxCollider2D>();
         box.offset = (Vector2)this.transform.position + Vector2.right * this.backgroundSize.x * (float)(this.backgroundCount - 1) * 0.5f;
         box.size = new Vector2(1f, this.backgroundSize.y * 1.1f);
         //~ generate props
-        // TODO
+        if(this.foregroundSprites.Length > 0){
+            emptyParent = new GameObject("Foreground");
+            emptyParent.transform.SetParent(this.transform);
+            emptyParent.transform.localPosition = Vector3.zero;
+            pos = Vector2.zero;
+            // TODO loop
+            //~ spawn random prefab
+            int index = this.GetRandomIndexWeighted(this.foregroundSprites);
+            GameObject sprite = Object.Instantiate<GameObject>(this.foregroundSprites[index].prefab, emptyParent.transform);
+            sprite.transform.position = pos;
+            // TODO
+        }
         Random.state = rState;
     }
 
 
     //~ private methods
-    /// <summary> Set the given <paramref name="spriteRenderer"/> a random background texture from <see cref="spriteList"/> and the corresponding material </summary>
-    /// <param name="spriteRenderer"> The sprite to set <see cref="Sprite"/> and <see cref="Material"/> </param>
-    /// <param name="spriteList"> The list of different <see cref="SpriteSpawn"/> </param>
-    private void SetSpriteRandomImgMaterial(ref SpriteRenderer spriteRenderer, in SpriteSpawn[] spriteList){
-        if(spriteList.Length == 0) return;
+    /// <summary> Gives an index from the given <see cref="weightedList"/> </summary>
+    /// <param name="weightedList"> The list of different <see cref="WeightedRandom"/> </param>
+    /// <returns> A random index in the <see cref="weightedList"/> </returns>
+    private int GetRandomIndexWeighted(in WeightedRandom[] weightedList){
+        // TODO replace with new random system
         int index = 0;
         float rValue = Random.value;
-        for(int i = spriteList.Length - 1; i > 0; i--){
-            if(rValue <= spriteList[i].randomWeigth){
+        for(int i = weightedList.Length - 1; i > 0; i--){
+            if(rValue <= weightedList[i].randomWeigth){
                 index = i;
                 break;
             }
         }
-        spriteRenderer.sprite = spriteList[index].texture;
-        spriteRenderer.sharedMaterial = spriteList[index].sharedMaterial;
-    }
-
-    /// <summary> Spawn a random foreground sprite at <paramref name="position2D"/> </summary>
-    /// <param name="position2D"> The position for the sprite </param>
-    private void SpawnRandomForegroundSprite(Vector2 position2D){
-        GameObject sprite = Object.Instantiate<GameObject>(
-            this.spritePrefab,
-            (Vector3)position2D,
-            Quaternion.identity,
-            this.transform
-        );
-        SpriteRenderer spriteRenderer = sprite.GetComponent<SpriteRenderer>();
-        this.SetSpriteRandomImgMaterial(ref spriteRenderer, this.foregroundSprites);
+        return index;
     }
 
 #if UNITY_EDITOR
