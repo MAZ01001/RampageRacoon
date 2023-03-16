@@ -176,13 +176,13 @@ public class BackgroundGenerator : MonoBehaviour {
         //~ calculate the actual percentage (backgroundSprites)
         float largestWeight = 0f;
         for(int i = 0; i < this.backgroundSprites.Length; i++){
-            this.backgroundSprites[i].actualPercent = Mathf.Clamp01(this.backgroundSprites[i].randomWeigth - largestWeight);
+            this.backgroundSprites[i].actualPercent = Mathf.Clamp01(this.backgroundSprites[i].randomWeigth - largestWeight) * 100f;
             if(this.backgroundSprites[i].randomWeigth > largestWeight) largestWeight = this.backgroundSprites[i].randomWeigth;
         }
         //~ calculate the actual percentage (foregroundSprites)
         largestWeight = 0f;
         for(int i = 0; i < this.foregroundSprites.Length; i++){
-            this.foregroundSprites[i].actualPercent = Mathf.Clamp01(this.foregroundSprites[i].randomWeigth - largestWeight);
+            this.foregroundSprites[i].actualPercent = Mathf.Clamp01(this.foregroundSprites[i].randomWeigth - largestWeight) * 100f;
             if(this.foregroundSprites[i].randomWeigth > largestWeight) largestWeight = this.foregroundSprites[i].randomWeigth;
         }
     }
