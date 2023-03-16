@@ -117,10 +117,7 @@ public class PlayerManager : MonoBehaviour {
     }
     public bool RotateGun()
     {
-        bool flipX = true;
-        if (rb.velocity.x > 0.1f) flipX = !this.facingRight;
-        else if (rb.velocity.x < -0.1f) flipX = this.facingRight;
-        return flipX;
+        return this.spriteRenderer.flipX == this.facingRight;
     }
     //Fire the Weapon
     public void Shoot()
