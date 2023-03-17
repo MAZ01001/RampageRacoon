@@ -20,6 +20,14 @@ public class GameManager : MonoBehaviour {
             //~ first start of game
             Application.targetFrameRate = 60;
             QualitySettings.vSyncCount = 1;
+            //~ load audio settings
+            this.LoadAudioSettings(
+                true,
+                out bool _,
+                out float _,
+                out float _,
+                out float _
+            );
         }
         GameManager.Instance = this;
     }
@@ -27,8 +35,10 @@ public class GameManager : MonoBehaviour {
     //~ public methods
     /// <summary> Toggle <see cref="pauseMenu"/> (in-game HUD) and freeze/unfreeze time </summary>
     public void Menu() {
-        if(this.menuSettings.activeSelf) this.menuSettings.SetActive(false);
-        else{
+        if(this.menuSettings.activeSelf){
+            GameManager.SavePreferences();
+            this.menuSettings.SetActive(false);
+        }else{
             GameManager.PauseTime(!this.pauseMenu.activeSelf);
             this.pauseMenu.SetActive(!this.pauseMenu.activeSelf);
         }
@@ -63,6 +73,24 @@ public class GameManager : MonoBehaviour {
         Screen.fullScreenMode = Screen.fullScreenMode != FullScreenMode.Windowed
             ? FullScreenMode.Windowed
             : FullScreenMode.FullScreenWindow;
+    }
+    /// <summary> Loads the audio settings from <see cref="PlayerPrefs"/> </summary>
+    /// <param name="resetAudio"> If true overrides the current values in sound manager with the ones loaded </param>
+    /// <param name="masterToggle"> The value for the saved "MasterToggle" bool </param>
+    /// <param name="masterVolume"> The value for the saved "MasterVolume" float </param>
+    /// <param name="musicVolume"> The value for the saved "MusicVolume" float </param>
+    /// <param name="sfxVolume"> The value for the saved "SFXVolume" float </param>
+    public void LoadAudioSettings(bool resetAudio, out bool masterToggle, out float masterVolume, out float musicVolume, out float sfxVolume){
+        masterToggle = PlayerPrefs.GetInt("MasterToggle", 1) == 1;
+        masterVolume = PlayerPrefs.GetFloat("MasterVolume", 0.5f);
+        musicVolume = PlayerPrefs.GetFloat("MusicVolume", 0.5f);
+        sfxVolume = PlayerPrefs.GetFloat("SFXVolume", 0.5f);
+        if(resetAudio){
+            SoundManager.Instance.ToggleMasterVolume(masterToggle);
+            SoundManager.Instance.MasterVolume(musicVolume, sfxVolume, masterVolume);
+            SoundManager.Instance.MusicVolume(musicVolume, masterVolume);
+            SoundManager.Instance.SFXVolume(sfxVolume, masterVolume);
+        }
     }
     /// <summary> Saved the values set in <see cref="PlayerPrefs"/> to disc </summary>
     public static void SavePreferences() => PlayerPrefs.Save();
