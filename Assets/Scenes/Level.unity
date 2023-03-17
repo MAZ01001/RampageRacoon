@@ -2558,6 +2558,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 4287159240242697166, guid: 7b6643f4795ac9044a5e0f6df87aa128, type: 3}
+      propertyPath: maxTime
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 4287159240242697166, guid: 7b6643f4795ac9044a5e0f6df87aa128, type: 3}
       propertyPath: blendSlider
       value: 
       objectReference: {fileID: 5756011969244388689}
