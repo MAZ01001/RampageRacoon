@@ -64,4 +64,6 @@ public class GameManager : MonoBehaviour {
             ? FullScreenMode.Windowed
             : FullScreenMode.FullScreenWindow;
     }
+    /// <summary> Saved the values set in <see cref="PlayerPrefs"/> to disc </summary>
+    public static void SavePreferences() => PlayerPrefs.Save();
 }
