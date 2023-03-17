@@ -33,7 +33,9 @@ public class ScoreManager : MonoBehaviour
     //Score addieren zu aktuellen Punkten
     public void AddScore(int points)
     {
+        Debug.Log("davor: " + score);
         score += points;
+        Debug.Log("danach: " + score);
     }
 
     //Score bekommen

@@ -6,12 +6,11 @@ public class CollectableItemsManager : MonoBehaviour
     public float timeToAdd;
 
     //kollidiert mit Spieler, dann..
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         
         //Sucht DrugEffectManager-Skript im GameObject des Players
-        DrugEffectManager drugEffectManager = other.gameObject.GetComponent<DrugEffectManager>();
-        Debug.Log("DrugEffectManager found: " + drugEffectManager);
+        DrugEffectManager drugEffectManager = collision.gameObject.GetComponent<DrugEffectManager>();
 
         //DrugEffectManager-Skript vorhanden? -> dann wird Timer erh�ht
         if (drugEffectManager != null)

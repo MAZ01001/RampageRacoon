@@ -100,6 +100,7 @@ GameObject:
   - component: {fileID: 5735078966269882290}
   - component: {fileID: -9204399401145707866}
   - component: {fileID: 5735078966269882291}
+  - component: {fileID: 4287159240242697166}
   - component: {fileID: 5735078966269882292}
   - component: {fileID: 5735078966269882288}
   - component: {fileID: 77592671738118720}
@@ -230,6 +231,20 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &4287159240242697166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5735078966269882293}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31cf8d981e5ca2b4084f20c1c94d7930, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxTime: 0
+  timerSlider: {fileID: 0}
 --- !u!114 &5735078966269882292
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -258,6 +273,8 @@ MonoBehaviour:
   moveSpeed: 8
   moveSmooth: 0.1
   weaponAnim: {fileID: 2186930460955170385}
+  health: 0
+  decayRate: 0
   damage: 1
 --- !u!70 &77592671738118720
 CapsuleCollider2D:

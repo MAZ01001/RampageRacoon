@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class Enemy : MonoBehaviour
 {
     [SerializeField]
-    private float moveSpeed = 2f;       // Geschwindigkeit für Gegner
+    private float moveSpeed = 2f;       // Geschwindigkeit fï¿½r Gegner
     [SerializeField]
     private float moveSmooth;         // idfk
     [SerializeField]
@@ -16,7 +16,7 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private GameObject itemPrefab;      // Prefab vom DropItem (Gegnerdrop)
     [SerializeField]
-    private float dropChance = 0.8f;    // Wahrscheinlichkeit für Itemdrop
+    private float dropChance = 0.8f;    // Wahrscheinlichkeit fï¿½r Itemdrop
     [SerializeField]
     private float detectRange;          // Reichweite in der Gegner den Spieler finden
 
@@ -25,6 +25,12 @@ public class Enemy : MonoBehaviour
     private GameObject player;          // Player
     private Rigidbody2D rb;
     private SpriteRenderer sprite;
+
+    [Header("Damage Anim")]
+    [SerializeField][Tooltip("Time in Seconds to fade between damage color and normal")]
+    private float damageEffectDecay;
+    private float timer = 0;            //TimerBuffer
+    private float dTimer;               //LERP interpolation of timer
 
     void Start()
     {
@@ -35,7 +41,7 @@ public class Enemy : MonoBehaviour
         currentHealth = maxHealth;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         bool inRange = (player.transform.position - this.transform.position).sqrMagnitude <= detectRange * detectRange;
         if (inRange == true)
@@ -59,13 +65,18 @@ public class Enemy : MonoBehaviour
         {
             sprite.flipX = false;
         }
+        //Damage Animation
+        timer -= Time.fixedDeltaTime;
+        dTimer = Mathf.Lerp(1, 0, timer / damageEffectDecay);
+        sprite.color = new Color(1, dTimer, dTimer);
     }
 
     public void Damage(int damage)
     {
-        Debug.Log("ouch");
+        Debug.Log(damage);
         currentHealth -= damage;
-        anim.Play("Damage", 0, 0f);
+        Debug.Log("Health after Attack: " + currentHealth);
+        timer = damageEffectDecay;  //Init DamageAnimTimer
 
         //Ist Gegner tot??
         if (currentHealth <= 0)
@@ -77,7 +88,8 @@ public class Enemy : MonoBehaviour
  
     void Die()
     {
-        // Zufällige Chance für Itemdrop
+        
+        // Zufï¿½llige Chance fï¿½r Itemdrop
         if (Random.value < dropChance)
         {
             Instantiate(itemPrefab, transform.position, Quaternion.identity);
@@ -86,7 +98,9 @@ public class Enemy : MonoBehaviour
         //vergebe Punkte - Referenz auf ScoreManager Skript
         ScoreManager.instance.AddScore(10);
 
-        //Gegner Sprite Bums zerstören
+
+
+        //Gegner Sprite Bums zerstï¿½ren
         Destroy(gameObject);
     }
 }
