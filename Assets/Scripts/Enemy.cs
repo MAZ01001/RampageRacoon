@@ -25,12 +25,15 @@ public class Enemy : MonoBehaviour
     private GameObject player;          // Player
     private Rigidbody2D rb;
     private SpriteRenderer sprite;
+    [SerializeField]
+    private ParticleSystem particle;
 
     [Header("Damage Anim")]
     [SerializeField][Tooltip("Time in Seconds to fade between damage color and normal")]
     private float damageEffectDecay;
     private float timer = 0;            //TimerBuffer
     private float dTimer;               //LERP interpolation of timer
+    private bool alive = true;
 
     void Start()
     {
@@ -44,7 +47,7 @@ public class Enemy : MonoBehaviour
     void FixedUpdate()
     {
         bool inRange = (player.transform.position - this.transform.position).sqrMagnitude <= detectRange * detectRange;
-        if (inRange == true)
+        if (inRange == true && alive)
         {
             Vector2 moveDir = (player.transform.position - this.transform.position).normalized;
             Vector2 moveDirSpeed = moveDir * this.moveSpeed;
@@ -55,7 +58,7 @@ public class Enemy : MonoBehaviour
                 this.moveSmooth
                 );
         }
-        else if (inRange == false) { this.rb.velocity = Vector2.zero; }
+        else if (inRange == false || !alive) { this.rb.velocity = Vector2.zero; }
         anim.SetFloat("Speed", rb.velocity.magnitude);
         if (rb.velocity.x > 0)
         {
@@ -77,14 +80,19 @@ public class Enemy : MonoBehaviour
         currentHealth -= damage;
         Debug.Log("Health after Attack: " + currentHealth);
         timer = damageEffectDecay;  //Init DamageAnimTimer
+        particle.Play();
 
         //Ist Gegner tot??
         if (currentHealth <= 0)
         {
-            Die();
+            DeathAnimation();
         }
     }
-
+    void DeathAnimation()
+    {
+        anim.Play("Die");
+        alive = false;
+    }
  
     void Die()
     {
