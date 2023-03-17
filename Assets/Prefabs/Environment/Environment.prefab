@@ -1,0 +1,102 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5756011969268415907
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5756011969268415910}
+  - component: {fileID: 5756011969268415909}
+  - component: {fileID: 5756011969268415908}
+  m_Layer: 0
+  m_Name: Environment
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5756011969268415910
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5756011969268415907}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5756011969268415909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5756011969268415907}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb58ab160237da14d8d41bd6eae91c57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  randomSeed: 5
+  groundYstart: -0.45
+  backgroundCount: 5
+  backgroundSpritePrefab: {fileID: 1839479332405164522, guid: c34434e0a515415498238958ff5fa463, type: 3}
+  backgroundSprites:
+  - randomWeigth: 0.1
+    actualPercent: 10
+    texture: {fileID: 21300000, guid: 10798aef28ba80b4c83a5d0f9c40b234, type: 3}
+    sharedMaterial: {fileID: 2100000, guid: ea64f810c3638a04ab478292d96ca0ee, type: 2}
+  - randomWeigth: 0.4
+    actualPercent: 30.000002
+    texture: {fileID: 21300000, guid: 9f52bfab307ffc64d9a04f785f7be6ad, type: 3}
+    sharedMaterial: {fileID: 2100000, guid: 9dd20dde6903c3e499ce43c4a520a701, type: 2}
+  - randomWeigth: 1
+    actualPercent: 60.000004
+    texture: {fileID: 21300000, guid: dffc413c15605374eb8c7e91dea93a4f, type: 3}
+    sharedMaterial: {fileID: 2100000, guid: de70ed4f38040d04c8bcaddb4f049871, type: 2}
+  foregroundCount: 10
+  foregroundSprites:
+  - randomWeigth: 0.25
+    actualPercent: 25
+    prefab: {fileID: 3807085692704244310, guid: 293e3234021c07a4d86da6758aa6eb0b, type: 3}
+  - randomWeigth: 0.5
+    actualPercent: 25
+    prefab: {fileID: 2679462588350221018, guid: 01ddbbea5efe8f442a4d09e79ccf37f1, type: 3}
+  - randomWeigth: 0.75
+    actualPercent: 25
+    prefab: {fileID: 4479998412452278986, guid: f9a5bd983f1e37b46b7f8e976dcfe8b4, type: 3}
+  - randomWeigth: 1
+    actualPercent: 25
+    prefab: {fileID: 2407976225857183216, guid: 1a5d2ce5c6663434092bfa4dc3fc8fdc, type: 3}
+--- !u!114 &5756011969268415908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5756011969268415907}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1802213b891bb344ab3d5c5dae4e88d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blendMaterials:
+  - {fileID: 2100000, guid: de70ed4f38040d04c8bcaddb4f049871, type: 2}
+  - {fileID: 2100000, guid: 9dd20dde6903c3e499ce43c4a520a701, type: 2}
+  - {fileID: 2100000, guid: ea64f810c3638a04ab478292d96ca0ee, type: 2}
+  - {fileID: 2100000, guid: 6c2a5a80f3f4b3d4194b459be4bbfed7, type: 2}
+  - {fileID: 2100000, guid: 692a8f7538fe303478ffd1b477dccc88, type: 2}
+  - {fileID: 2100000, guid: 1f44c0d04c7062b45b8c57baf9ab0022, type: 2}
+  - {fileID: 2100000, guid: 3a8e811e58318d846b7656516dc7f5fd, type: 2}
+  - {fileID: 2100000, guid: c1b7ab61339da644c96d32f889ff6960, type: 2}
+  - {fileID: 2100000, guid: 07de29ea746fd63469a44c45e599c2d2, type: 2}
+  - {fileID: 2100000, guid: f7fc1e89481ef514e896c1512a9b5708, type: 2}
+  testHere: 0

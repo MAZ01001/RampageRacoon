@@ -5,8 +5,8 @@ A 2D game in the Unity game engine
 ## Description
 
 >
-> You play as a (drugged) raccoon and throw flowers to share the joy,
-> but watch out because fewer pills and you might get aware of what's actually happening to those around you.
+> You play as a (drugged) raccoon and shoot bubbles to share the joy,
+> but watch out because fewer pills, and you might get aware of what's actually happening to those around you.
 >
 
 ## Controls
@@ -23,8 +23,8 @@ A 2D game in the Unity game engine
 | André "Stiftoad" Linnepe  | [Instagram@stiftoad](https://www.instagram.com/stiftoad/)<br>[Youtube/Stiftoad](https://www.youtube.com/channel/UC_r9MmRsCjODSs8aRjsXhRw)                                                                                                                                              | Music, Programming, Animation |
 | Matthias "MAZ" Angst      | [<img src="https://maz01001.github.io/img/icon.svg" height="18" style="height:1.3rem;vertical-align:text-bottom;"/> MAZ01001.GitHub.io](https://maz01001.github.io/)<br/>[YouTube/MAZ](https://www.youtube.com/@MAZ01001)<br/>[Steam/MAZ01001](https://steamcommunity.com/id/MAZ01001) | Programming                   |
 | Florian "OG.OL" Briese    |                                                                                                                                                                                                                                                                                        | Programming                   |
-|                           |                                                                                                                                                                                                                                                                                        | 2D-Art                        |
+| Josephine Methner         |                                                                                                                                                                                                                                                                                        | 2D-Art                        |
 | Nils "N.W." Weibel        |                                                                                                                                                                                                                                                                                        | UI, Sound                     |
 | Niklas "Ciktore" Osterode | [Twitter@CaptainCiktore](https://twitter.com/CaptainCiktore)                                                                                                                                                                                                                           | UI                            |
-|                           |                                                                                                                                                                                                                                                                                        | 2D-Art                        |
-|                           |                                                                                                                                                                                                                                                                                        | 2D-Art                        |
+| Simeon Gerchev            | [Homepage](https://mrdrawin.github.io/karagioz/)                                                                                                                                                                                                                                       | 2D-Art                        |
+| Zoe-Lana Graetz           |                                                                                                                                                                                                                                                                                        | 2D-Art                        |

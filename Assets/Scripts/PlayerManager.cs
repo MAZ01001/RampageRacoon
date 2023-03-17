@@ -73,6 +73,9 @@ public class PlayerManager : MonoBehaviour {
     private Vector2 smoothVelocity = Vector3.zero;
     private Enemy enemyScript;
 
+    //~ public
+    public bool IsFacingRight => this.spriteRenderer.flipX != this.facingRight;
+
     //~ unity methods (private)
     private void OnDrawGizmosSelected() {
         //~ draw walking axis of player
@@ -112,20 +115,12 @@ public class PlayerManager : MonoBehaviour {
         //~ player facing direction (only change while moving)
         if(moveDir.x > 0.1f) this.spriteRenderer.flipX = !this.facingRight;
         else if(moveDir.x < -0.1f) this.spriteRenderer.flipX = this.facingRight;
-
-        // TODO player shoots
-        // this.inputManager.shoot;
-
         //~ update animator values
         weaponAnim.SetBool("Firing", this.inputManager.shoot);
     }
-    public bool RotateGun()
-    {
-        return this.spriteRenderer.flipX == this.facingRight;
-    }
-    //Fire the Weapon
-    public void Shoot()
-    {
+
+    /// <summary> Fire the Weapon </summary>
+    public void Shoot() {
         Debug.Log("Bang");
         Vector2 origin = this.transform.position; //Make this an empty at the tip of the gun preferrably :D
         Vector2 direction = this.transform.right;
@@ -134,8 +129,7 @@ public class PlayerManager : MonoBehaviour {
         float maxDistance = 500f;
         int layerMask = LayerMask.GetMask("Shootables"); //Enemies AND obstacles?
         RaycastHit2D hitInfo = Physics2D.Raycast(origin, direction, maxDistance, layerMask);
-        if (hitInfo.collider?.gameObject is GameObject enemy)
-        {
+        if (hitInfo.collider?.gameObject is GameObject enemy){
             Debug.Log("hit");
             enemyScript = enemy.GetComponent<Enemy>();
             enemyScript.Damage(damage);

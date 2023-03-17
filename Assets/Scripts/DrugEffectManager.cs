@@ -17,6 +17,7 @@ public class DrugEffectManager : MonoBehaviour
     private BlendSlider blendSlider;
 
     private float timer;
+    private float blendVal;         //sqr ease of timer
 
     //Start Timer  Druffianzeige
     private void Start()
@@ -37,7 +38,8 @@ public class DrugEffectManager : MonoBehaviour
         float t = timer / maxTime;
         if (t > 0)
         {
-            blendSlider.BlendEnvironment(t < 0.5 ? 2 * t * t : 1 - Mathf.Pow(-2 * t + 2, 2) / 2); // Sqr EaseInOut Timer
+            blendVal = (t < 0.5 ? 2 * t * t : 1 - Mathf.Pow(-2 * t + 2, 2) / 2);
+            blendSlider.BlendEnvironment(blendVal); // Sqr EaseInOut Timer
             //blendSlider.BlendEnvironment(t); //Linear Timer
             // Aktualisiert Anzeige Timer (Slider)
             timerSlider.value = timer / maxTime;
@@ -48,6 +50,10 @@ public class DrugEffectManager : MonoBehaviour
             //WICHTIG: Szene vom GameOverScreen richtig eintippen -> hard gecodet
             SceneManager.LoadScene("GameOverTest");
         }
+    }
+    public float GetEnvironmentEffect()
+    {
+        return blendVal;
     }
 
     //wird aufgerufen vom Skript CollectableItemManager-Skript, timeToAdd wird dabei vom Skript mitgegeben
