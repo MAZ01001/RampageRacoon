@@ -13,10 +13,18 @@ public class UIController : MonoBehaviour {
 
     //~ unity methods (private)
     private void Start() {
-        masterVolume.isOn = PlayerPrefs.GetInt("MasterToggle", 1) == 1;
-        masterSlider.value = PlayerPrefs.GetFloat("MasterVolume", 0.5f);
-        musicSlider.value = PlayerPrefs.GetFloat("MusicVolume", 0.5f);
-        sfxSlider.value = PlayerPrefs.GetFloat("SFXVolume", 0.5f);
+        //~ load audio settings
+        GameManager.Instance.LoadAudioSettings(
+            false,
+            out bool _masterToggle,
+            out float _masterVolume,
+            out float _musicVolume,
+            out float _sfxVolume
+        );
+        masterVolume.isOn = _masterToggle;
+        masterSlider.value = _masterVolume;
+        musicSlider.value = _musicVolume;
+        sfxSlider.value = _sfxVolume;
     }
 
     //~ public methods
