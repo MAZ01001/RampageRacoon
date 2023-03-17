@@ -104,7 +104,6 @@ GameObject:
   - component: {fileID: 5735078966269882288}
   - component: {fileID: 77592671738118720}
   - component: {fileID: 1839308979681552548}
-  - component: {fileID: 7194573575461331274}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -297,23 +296,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!114 &7194573575461331274
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5735078966269882293}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0cc4f600e11aa6e498fc9b0d381608a6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  defaultSprite: {fileID: 722854554, guid: b28fc79262531294fa5e81935612e374, type: 3}
-  sprites:
-  - {fileID: 722854554, guid: b28fc79262531294fa5e81935612e374, type: 3}
-  - {fileID: -998312521, guid: b28fc79262531294fa5e81935612e374, type: 3}
-  material: {fileID: 2100000, guid: 07de29ea746fd63469a44c45e599c2d2, type: 2}
 --- !u!1 &8272792334990992986
 GameObject:
   m_ObjectHideFlags: 0
@@ -392,10 +374,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5735078966269882289}
     m_Modifications:
-    - target: {fileID: 52323616068638910, guid: a7c39c30ea6366843a44d3997b8f8b3b, type: 3}
-      propertyPath: m_PlayOnAwake
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 167265973405613226, guid: a7c39c30ea6366843a44d3997b8f8b3b, type: 3}
       propertyPath: m_Name
       value: TommygunPrefab
@@ -406,11 +384,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4517036047564839239, guid: a7c39c30ea6366843a44d3997b8f8b3b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.21
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4517036047564839239, guid: a7c39c30ea6366843a44d3997b8f8b3b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.7
+      value: -0.001
       objectReference: {fileID: 0}
     - target: {fileID: 4517036047564839239, guid: a7c39c30ea6366843a44d3997b8f8b3b, type: 3}
       propertyPath: m_LocalPosition.z
@@ -418,7 +396,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4517036047564839239, guid: a7c39c30ea6366843a44d3997b8f8b3b, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.93358046
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4517036047564839239, guid: a7c39c30ea6366843a44d3997b8f8b3b, type: 3}
       propertyPath: m_LocalRotation.x
@@ -430,7 +408,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4517036047564839239, guid: a7c39c30ea6366843a44d3997b8f8b3b, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.35836798
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4517036047564839239, guid: a7c39c30ea6366843a44d3997b8f8b3b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -442,7 +420,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4517036047564839239, guid: a7c39c30ea6366843a44d3997b8f8b3b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: -42
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a7c39c30ea6366843a44d3997b8f8b3b, type: 3}
