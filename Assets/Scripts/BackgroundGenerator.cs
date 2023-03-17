@@ -169,6 +169,8 @@ public class BackgroundGenerator : MonoBehaviour {
         }
         //~ restore random state
         Random.state = rState;
+        //~ start spawning enemies
+        this.GetComponent<EnemySpawner>()?.StartSpawning(this.spawnAreaMin, this.spawnAreaMax);
     }
 
 #if UNITY_EDITOR
