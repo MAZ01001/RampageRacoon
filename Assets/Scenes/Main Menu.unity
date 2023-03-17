@@ -585,9 +585,53 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -734419964061366872, guid: ee962794af2ad17488d7fd33073546e6, type: 3}
+      propertyPath: musicSource1
+      value: 
+      objectReference: {fileID: 1333060286}
+    - target: {fileID: -734419964061366872, guid: ee962794af2ad17488d7fd33073546e6, type: 3}
+      propertyPath: musicSource2
+      value: 
+      objectReference: {fileID: 1367426432}
+    - target: {fileID: -734419964061366872, guid: ee962794af2ad17488d7fd33073546e6, type: 3}
+      propertyPath: musicSounds.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -734419964061366872, guid: ee962794af2ad17488d7fd33073546e6, type: 3}
+      propertyPath: musicSounds.Array.data[0].name
+      value: Light
+      objectReference: {fileID: 0}
+    - target: {fileID: -734419964061366872, guid: ee962794af2ad17488d7fd33073546e6, type: 3}
+      propertyPath: musicSounds.Array.data[1].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 7b040442d16939641a6640b3c0c029cf, type: 3}
+    - target: {fileID: -734419964061366872, guid: ee962794af2ad17488d7fd33073546e6, type: 3}
+      propertyPath: musicSounds.Array.data[1].name
+      value: Dark
+      objectReference: {fileID: 0}
+    - target: {fileID: -734419964061366872, guid: ee962794af2ad17488d7fd33073546e6, type: 3}
+      propertyPath: musicSounds.Array.data[2].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 619bee20402b86b40baabeeb3a39f3ca, type: 3}
+    - target: {fileID: -734419964061366872, guid: ee962794af2ad17488d7fd33073546e6, type: 3}
+      propertyPath: musicSounds.Array.data[2].name
+      value: InGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 1638263664360568496, guid: ee962794af2ad17488d7fd33073546e6, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 3215494728682332065, guid: ee962794af2ad17488d7fd33073546e6, type: 3}
       propertyPath: m_Name
       value: SoundManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 4044682312703159751, guid: ee962794af2ad17488d7fd33073546e6, type: 3}
+      propertyPath: m_Name
+      value: Music Source 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5724349691277187799, guid: ee962794af2ad17488d7fd33073546e6, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8005349710669853729, guid: ee962794af2ad17488d7fd33073546e6, type: 3}
       propertyPath: m_RootOrder
@@ -899,6 +943,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!82 &1333060286 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 2362363459519457588, guid: ee962794af2ad17488d7fd33073546e6, type: 3}
+  m_PrefabInstance: {fileID: 753449620}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &1367426432 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 6103835883119133111, guid: ee962794af2ad17488d7fd33073546e6, type: 3}
+  m_PrefabInstance: {fileID: 753449620}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1399433206
 PrefabInstance:
   m_ObjectHideFlags: 0
