@@ -26,6 +26,12 @@ public class Enemy : MonoBehaviour
     private Rigidbody2D rb;
     private SpriteRenderer sprite;
 
+    [Header("Damage Anim")]
+    [SerializeField][Tooltip("Time in Seconds to fade between damage color and normal")]
+    private float damageEffectDecay;
+    private float timer = 0;            //TimerBuffer
+    private float dTimer;               //LERP interpolation of timer
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -35,7 +41,7 @@ public class Enemy : MonoBehaviour
         currentHealth = maxHealth;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         bool inRange = (player.transform.position - this.transform.position).sqrMagnitude <= detectRange * detectRange;
         if (inRange == true)
@@ -59,13 +65,17 @@ public class Enemy : MonoBehaviour
         {
             sprite.flipX = false;
         }
+        //Damage Animation
+        timer -= Time.fixedDeltaTime;
+        dTimer = Mathf.Lerp(1, 0, timer / damageEffectDecay);
+        sprite.color = new Color(1, dTimer, dTimer);
     }
 
     public void Damage(int damage)
     {
         Debug.Log("ouch");
         currentHealth -= damage;
-        anim.Play("Damage", 0, 0f);
+        timer = damageEffectDecay;  //Init DamageAnimTimer
 
         //Ist Gegner tot??
         if (currentHealth <= 0)
