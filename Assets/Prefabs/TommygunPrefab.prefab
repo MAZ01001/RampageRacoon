@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4517036047564839239}
   - component: {fileID: 5434870865673415780}
-  - component: {fileID: 5106862260650130017}
   - component: {fileID: 1702336959601078536}
   - component: {fileID: 927812392669770045}
   - component: {fileID: 52323616068638910}
@@ -28,14 +27,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 167265973405613226}
-  m_LocalRotation: {x: 0, y: 0, z: -0.35836798, w: 0.93358046}
-  m_LocalPosition: {x: 0.21, y: 1.7, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.001, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -42}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5434870865673415780
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -76,43 +75,18 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: bd471a68df9036549902d27d712cd0b6, type: 3}
+  m_SortingOrder: 0
+  m_Sprite: {fileID: -858283941, guid: 81deffd1adb66a9499da83d79ce1ca52, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 10, y: 10}
+  m_Size: {x: 7.142857, y: 7.142857}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 1
---- !u!114 &5106862260650130017
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 167265973405613226}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0cc4f600e11aa6e498fc9b0d381608a6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  defaultSprite: {fileID: 21300000, guid: 5dee68af15d518a41b7d0edff3f95f64, type: 3}
-  sprites:
-  - {fileID: 21300000, guid: 35139d089c0e1c2499f1e2c9dd392821, type: 3}
-  - {fileID: 21300000, guid: ed893a3cf6d61fe4790f2500d3ff2d0c, type: 3}
-  - {fileID: 21300000, guid: 4392472fb0db5024d960ccfb6c6869ba, type: 3}
-  - {fileID: 21300000, guid: ed9b61766fbcb5b44bad34661bb63fe5, type: 3}
-  - {fileID: 21300000, guid: 759ae595716276f4a85f330b3cf3e431, type: 3}
-  - {fileID: 21300000, guid: 5dee68af15d518a41b7d0edff3f95f64, type: 3}
-  - {fileID: 21300000, guid: e40480e8c700ab6479d4f03171939214, type: 3}
-  - {fileID: 21300000, guid: dd93f28528f054e48ba201c20f7dc9fc, type: 3}
-  - {fileID: 21300000, guid: d4214024f9cca0340b0097a389dd2e85, type: 3}
-  - {fileID: 21300000, guid: 6572bde9cf3311447b0f223d2e764008, type: 3}
-  material: {fileID: 2100000, guid: f7fc1e89481ef514e896c1512a9b5708, type: 2}
 --- !u!114 &1702336959601078536
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -136,7 +110,7 @@ Animator:
   m_GameObject: {fileID: 167265973405613226}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: a3dc51844c02ec84fa352afc2b15e62e, type: 2}
+  m_Controller: {fileID: 9100000, guid: c1d90a4edef72a541b377228ee934c74, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -157,7 +131,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 345adb8dc59e9d446a61850b2302a207, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
