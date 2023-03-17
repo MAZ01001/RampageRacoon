@@ -33,10 +33,10 @@ public class SoundManager : MonoBehaviour
 
     private void Start()
     {
-        
-        PlayMusic("Light");
-        PlayMusic("Dark");
-
+        if(Instance == this){
+            PlayMusic("Light");
+            PlayMusic("Dark");
+        }
 
     }
 
