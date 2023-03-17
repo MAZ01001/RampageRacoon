@@ -297,7 +297,7 @@ GameObject:
   m_Component:
   - component: {fileID: 176811251}
   - component: {fileID: 176811250}
-  - component: {fileID: 176811252}
+  - component: {fileID: 232031120}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -335,7 +335,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &176811252
+--- !u!114 &232031120
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -383,7 +383,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8005349710669853729, guid: ee962794af2ad17488d7fd33073546e6, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8005349710669853729, guid: ee962794af2ad17488d7fd33073546e6, type: 3}
       propertyPath: m_LocalPosition.x
@@ -444,7 +444,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 382114174169397883, guid: 4a405668fbfeb6a4592755b180760931, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 312.4063
+      value: 353.27997
       objectReference: {fileID: 0}
     - target: {fileID: 382114174169397883, guid: 4a405668fbfeb6a4592755b180760931, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -660,7 +660,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1803197655790608089, guid: 4a405668fbfeb6a4592755b180760931, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 937.21893
+      value: 1059.8398
       objectReference: {fileID: 0}
     - target: {fileID: 1803197655790608089, guid: 4a405668fbfeb6a4592755b180760931, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -902,7 +902,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8286873205584783328, guid: 6bbc1b9582f8a5a43ac0fc9d6c0b7e58, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8286873205584783328, guid: 6bbc1b9582f8a5a43ac0fc9d6c0b7e58, type: 3}
       propertyPath: m_LocalPosition.x
