@@ -109,7 +109,7 @@ MonoBehaviour:
   itemPrefab: {fileID: 1146562849004431163, guid: e3ee20f7c26a21046be33a7f94f362c5, type: 3}
   dropChance: 0.8
   detectRange: 12
-  damageEffectDecay: 0
+  damageEffectDecay: 0.5
 --- !u!70 &6710582590712833475
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
