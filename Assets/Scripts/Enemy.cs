@@ -1,7 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine.Events;
 
 public class Enemy : MonoBehaviour
 {
@@ -31,6 +29,9 @@ public class Enemy : MonoBehaviour
     private float damageEffectDecay;
     private float timer = 0;            //TimerBuffer
     private float dTimer;               //LERP interpolation of timer
+
+    [HideInInspector]
+    public UnityEvent OnDie;
 
     void Start()
     {
@@ -98,7 +99,7 @@ public class Enemy : MonoBehaviour
         //vergebe Punkte - Referenz auf ScoreManager Skript
         ScoreManager.instance.AddScore(10);
 
-
+        this.OnDie.Invoke();
 
         //Gegner Sprite Bums zerst�ren
         Destroy(gameObject);
