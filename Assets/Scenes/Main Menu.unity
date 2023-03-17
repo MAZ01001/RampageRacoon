@@ -216,7 +216,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1420411258}
-  - {fileID: 1399433207}
+  - {fileID: 1399433209}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -386,7 +386,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: testLevel
+          m_StringArgument: Level
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &232031121
@@ -960,7 +960,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1180940265380368535, guid: 4a405668fbfeb6a4592755b180760931, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 2.2
+      value: 2.199997
       objectReference: {fileID: 0}
     - target: {fileID: 1190960703099721527, guid: 4a405668fbfeb6a4592755b180760931, type: 3}
       propertyPath: m_RootOrder
@@ -1288,11 +1288,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4a405668fbfeb6a4592755b180760931, type: 3}
---- !u!4 &1399433207 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1190960703099721527, guid: 4a405668fbfeb6a4592755b180760931, type: 3}
-  m_PrefabInstance: {fileID: 1399433206}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1399433208 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5675133669622779655, guid: 4a405668fbfeb6a4592755b180760931, type: 3}
@@ -1304,6 +1299,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e026256f46651b54390494ea160ec22e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!224 &1399433209 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 1351711885393116032, guid: 4a405668fbfeb6a4592755b180760931, type: 3}
+  m_PrefabInstance: {fileID: 1399433206}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1420411257
 GameObject:
   m_ObjectHideFlags: 0
