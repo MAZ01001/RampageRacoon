@@ -17,7 +17,7 @@ public class ScoreManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            scoreText.text = "Score: " + score.ToString();
+            scoreText.text = score.ToString();
         }
         else
         {
@@ -31,7 +31,7 @@ public class ScoreManager : MonoBehaviour
         Debug.Log("davor: " + score);
         score += points;
         Debug.Log("danach: " + score);
-        scoreText.text = "Score: " + score.ToString();
+        scoreText.text = score.ToString();
     }
 
     //Score bekommen
