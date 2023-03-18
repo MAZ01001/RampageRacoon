@@ -103,12 +103,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
+  facingRight: 1
   moveSmooth: 0.1
   maxHealth: 1
-  currentHealth: 1
   itemPrefab: {fileID: 1146562849004431163, guid: e3ee20f7c26a21046be33a7f94f362c5, type: 3}
   dropChance: 0.5
   detectRange: 16
+  damage: 2
+  attackRange: 2
   particle: {fileID: 4692555454353404978}
   damageEffectDecay: 0.5
   OnDie:
