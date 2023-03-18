@@ -127,8 +127,8 @@ public class PlayerManager : MonoBehaviour {
             this.moveSmooth
         );
         //~ player facing direction (only change while moving)
-        if(moveDir.x > 0.1f) this.spriteRenderer.flipX = !this.facingRight;
-        else if(moveDir.x < -0.1f) this.spriteRenderer.flipX = this.facingRight;
+        if(Input.mousePosition.x > Screen.width/2) this.spriteRenderer.flipX = !this.facingRight;
+        else if(Input.mousePosition.x < Screen.width/2) this.spriteRenderer.flipX = this.facingRight;
         //~ update animator values
         weaponAnim.SetBool("Firing", this.inputManager.shoot);
     }
@@ -138,8 +138,8 @@ public class PlayerManager : MonoBehaviour {
         Debug.Log("Bang");
         Vector2 origin = this.transform.position; //Make this an empty at the tip of the gun preferrably :D
         Vector2 direction = this.transform.right;
-        if (rb.velocity.x > 0.1f) direction = this.transform.right;
-        else if (rb.velocity.x < -0.1f) direction = this.transform.right*-1;
+        if (this.IsFacingRight) direction = this.transform.right;
+        else if (!this.IsFacingRight) direction = this.transform.right*-1;
         int layerMask = LayerMask.GetMask("Shootables"); //Enemies AND obstacles?
         RaycastHit2D hitInfo = Physics2D.Raycast(origin, direction, this.shootMaxDistance, layerMask);
         if (hitInfo.collider?.gameObject is GameObject enemy){

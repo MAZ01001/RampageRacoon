@@ -377,6 +377,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -734419964061366872, guid: ee962794af2ad17488d7fd33073546e6, type: 3}
+      propertyPath: musicSounds.Array.data[0].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 43aece5fc61de764f99426807168fbd1, type: 3}
+    - target: {fileID: -734419964061366872, guid: ee962794af2ad17488d7fd33073546e6, type: 3}
+      propertyPath: musicSounds.Array.data[1].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 2f7868ec45a6a0547a0a82546ae3a3c4, type: 3}
     - target: {fileID: 3215494728682332065, guid: ee962794af2ad17488d7fd33073546e6, type: 3}
       propertyPath: m_Name
       value: SoundManager
