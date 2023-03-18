@@ -8,7 +8,9 @@ public class GameManager : MonoBehaviour {
     [SerializeField][Tooltip("The in-game menu HUD")] private GameObject pauseMenu;
     [SerializeField][Tooltip("The in-game settings HUD")] private GameObject menuSettings;
     [SerializeField][Tooltip("The in-game game over HUD")] private GameObject gameOver;
+    [Header("UI")]
     [SerializeField][Tooltip("The highscore UI text")] private TMP_Text highScoreText;
+    [SerializeField][Tooltip("The highscore trophy")] private GameObject highScoreTrophy;
     //~ inspector (public)
     [Header("Player")]
     [SerializeField][Tooltip("The player in scene")] public PlayerManager Player;
@@ -25,6 +27,8 @@ public class GameManager : MonoBehaviour {
             //~ first start of game
             Application.targetFrameRate = 60;
             QualitySettings.vSyncCount = 1;
+            //~ load fullscreen setting
+            Screen.fullScreenMode = (FullScreenMode)PlayerPrefs.GetInt("Fullscreen", (int)FullScreenMode.FullScreenWindow);
             //~ load highscore
             this.highscore = PlayerPrefs.GetInt("Highscore", 0);
         }
@@ -47,11 +51,15 @@ public class GameManager : MonoBehaviour {
         GameManager.PauseTime(true);
         int score = ScoreManager.instance.GetScore();
         if(score > this.highscore){
-            this.highScoreText.text = $"New Highscore\n{score}";
+            this.highScoreTrophy.SetActive(true);
+            this.highScoreText.text = $"Congratulations!\n\nNew Highscore\n{score}";
             this.highscore = score;
             PlayerPrefs.SetInt("Highscore", this.highscore);
             PlayerPrefs.Save();
-        }else this.highScoreText.text = $"Score\n{score}\n\nHighscore\n{this.highscore}";
+        }else{
+            this.highScoreTrophy.SetActive(false);
+            this.highScoreText.text = $"Score\n{score}\n\nHighscore\n{this.highscore}";
+        }
         this.gameOver.SetActive(true);
     }
 
@@ -98,6 +106,12 @@ public class GameManager : MonoBehaviour {
             SoundManager.Instance.SFXVolume(sfxVolume, masterVolume);
         }
     }
-    /// <summary> Saved the values set in <see cref="PlayerPrefs"/> to disc </summary>
-    public static void SavePreferences() => PlayerPrefs.Save();
+    /// <summary>
+    ///     Saves the values set in <see cref="PlayerPrefs"/> to disc
+    ///     <br/>Also sets the "Fullscreen" value before saving
+    /// </summary>
+    public static void SavePreferences(){
+        PlayerPrefs.SetInt("Fullscreen", (int)Screen.fullScreenMode);
+        PlayerPrefs.Save();
+    }
 }

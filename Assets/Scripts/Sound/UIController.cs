@@ -11,6 +11,9 @@ public class UIController : MonoBehaviour {
     [SerializeField][Tooltip("The sound toggle in scene")]
     private Toggle masterVolume;
 
+    [SerializeField][Tooltip("The fullscreen toggle in scene")]
+    private Toggle fullscreen;
+
     //~ unity methods (private)
     private void Start() {
         //~ load audio settings
@@ -25,6 +28,8 @@ public class UIController : MonoBehaviour {
         masterSlider.value = _masterVolume;
         musicSlider.value = _musicVolume;
         sfxSlider.value = _sfxVolume;
+        //~ get fullscreen setting
+        fullscreen.isOn = Screen.fullScreen;
     }
 
     //~ public methods
