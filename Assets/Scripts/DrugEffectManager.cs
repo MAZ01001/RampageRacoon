@@ -19,6 +19,11 @@ public class DrugEffectManager : MonoBehaviour
     private float timer;
     private float blendVal;         //sqr ease of timer
     private float addTime = 0f;
+    public static DrugEffectManager Instance;
+
+    private void Awake() {
+        DrugEffectManager.Instance = this;
+    }
 
     //Start Timer  Druffianzeige
     private void Start()
@@ -35,7 +40,7 @@ public class DrugEffectManager : MonoBehaviour
     //Aktualisierung der Timer-Anzeige
     private void FixedUpdate()
     {
-        if(this.addTime > 0f){
+        if(this.addTime != 0f){
             timer = Mathf.Clamp(this.timer + this.addTime, 0f, this.maxTime);
             this.addTime = 0;
         }
