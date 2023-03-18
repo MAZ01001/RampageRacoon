@@ -102,12 +102,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fae51bb2c1400974a89ea7c85ba7e045, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 4
+  moveSpeed: 1
   moveSmooth: 0.1
   maxHealth: 4
   currentHealth: 1
   itemPrefab: {fileID: 1146562849004431163, guid: e3ee20f7c26a21046be33a7f94f362c5, type: 3}
-  dropChance: 0.8
+  dropChance: 1
   detectRange: 12
   particle: {fileID: 4692555454353404978}
   damageEffectDecay: 0.5

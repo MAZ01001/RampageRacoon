@@ -91,6 +91,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefabs:
   - {fileID: 6710582590712833482, guid: 6e15d96d2406e6243879a0567ea75498, type: 3}
+  - {fileID: 6710582590712833482, guid: 4263b3201af7b8042a88313e19956435, type: 3}
+  - {fileID: 6710582590712833482, guid: c93eaaf18ac8cd64a8d67252ae6ce5a9, type: 3}
   spawnTimeInteval: 3
   maxEnemyCount: 100
   cameraWidth: 27
@@ -120,4 +122,5 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 1224d68580ed44c438a83f14d404d2ac, type: 2}
   - {fileID: 2100000, guid: 4bf5014d211afcf4fa6cfd1e3978298d, type: 2}
   - {fileID: 2100000, guid: 0d977ea4bcd2ac8449f9e3028cb7d610, type: 2}
+  - {fileID: 2100000, guid: 8376f40a3018d8448b1ccf14836d7084, type: 2}
   testHere: 1

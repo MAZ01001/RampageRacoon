@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Waine
+  m_Name: Beagle
   m_Shader: {fileID: -6465566751694194690, guid: 9fd6da4b81776774dbebdc1354081862, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []

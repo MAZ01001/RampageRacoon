@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 6710582590712833479}
   - component: {fileID: 6710582590712833477}
   m_Layer: 6
-  m_Name: enemy_squirrel
+  m_Name: enemy_Beagle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 6710582590712833482}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 16.37, y: -3.17, z: 0}
-  m_LocalScale: {x: 0.16, y: 0.16, z: 0.16}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5401410120617476138}
@@ -58,7 +58,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 0d977ea4bcd2ac8449f9e3028cb7d610, type: 2}
+  - {fileID: 2100000, guid: 8376f40a3018d8448b1ccf14836d7084, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -79,7 +79,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 78cc17f41368dcc4c98d964a459d6b63, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 22395556e58937c4ea2cd23de3b40f33, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -102,13 +102,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fae51bb2c1400974a89ea7c85ba7e045, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 3
+  moveSpeed: 5
   moveSmooth: 0.1
-  maxHealth: 2
+  maxHealth: 1
   currentHealth: 1
   itemPrefab: {fileID: 1146562849004431163, guid: e3ee20f7c26a21046be33a7f94f362c5, type: 3}
-  dropChance: 0.8
-  detectRange: 12
+  dropChance: 0.5
+  detectRange: 16
   particle: {fileID: 4692555454353404978}
   damageEffectDecay: 0.5
   OnDie:
@@ -127,8 +127,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -1.7331179, y: -0.70712143}
-  m_Size: {x: 10.061924, y: 2.3126163}
+  m_Offset: {x: 0.0014553189, y: 0.09846665}
+  m_Size: {x: 1.8558023, y: 0.57502353}
   m_Direction: 1
 --- !u!50 &6710582590712833472
 Rigidbody2D:
@@ -161,7 +161,7 @@ Animator:
   m_GameObject: {fileID: 6710582590712833482}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: bc33b8ef77fd16d4ba13f1d8745389f8, type: 2}
+  m_Controller: {fileID: 9100000, guid: f77e73b35b793cc48a3bf7ef2857a056, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -183,11 +183,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cc4f600e11aa6e498fc9b0d381608a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultSprite: {fileID: 21300000, guid: e73d7149e045c1946887b214d8ddca09, type: 3}
+  defaultSprite: {fileID: 21300000, guid: deb2315d4e06fac48b3e75952751a22d, type: 3}
   sprites:
-  - {fileID: 21300000, guid: 5ecae880be03dcf468d74c46d2f206b0, type: 3}
-  - {fileID: 21300000, guid: d04cd167885685f459aa96a6e76d6f07, type: 3}
-  material: {fileID: 2100000, guid: 0d977ea4bcd2ac8449f9e3028cb7d610, type: 2}
+  - {fileID: 21300000, guid: 2ec2acfd263c5db449faa278e9125475, type: 3}
+  - {fileID: 21300000, guid: 0d3a0810f2a0c524ebfc046981004415, type: 3}
+  material: {fileID: 2100000, guid: 8376f40a3018d8448b1ccf14836d7084, type: 2}
 --- !u!1 &8299078741347999513
 GameObject:
   m_ObjectHideFlags: 0
@@ -214,7 +214,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8299078741347999513}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.0819068, y: 7.0854144, z: 0.08711471}
+  m_LocalPosition: {x: -0.485, y: 1.391, z: 0.08711471}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
