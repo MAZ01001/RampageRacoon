@@ -18,6 +18,7 @@ public class DrugEffectManager : MonoBehaviour
 
     private float timer;
     private float blendVal;         //sqr ease of timer
+    private float addTime = 0f;
 
     //Start Timer  Druffianzeige
     private void Start()
@@ -34,6 +35,10 @@ public class DrugEffectManager : MonoBehaviour
     //Aktualisierung der Timer-Anzeige
     private void FixedUpdate()
     {
+        if(this.addTime > 0f){
+            timer = Mathf.Clamp(this.timer + this.addTime, 0f, this.maxTime);
+            this.addTime = 0;
+        }
         timer -= Time.fixedDeltaTime;
         float t = timer / maxTime;
         if (t > 0)
@@ -43,13 +48,7 @@ public class DrugEffectManager : MonoBehaviour
             //blendSlider.BlendEnvironment(t); //Linear Timer
             // Aktualisiert Anzeige Timer (Slider)
             timerSlider.value = timer / maxTime;
-        }
-        //Timer abgelaufen?
-        if (timer <= 0)
-        {
-            //WICHTIG: Szene vom GameOverScreen richtig eintippen -> hard gecodet
-            SceneManager.LoadScene("GameOverTest");
-        }
+        }else GameManager.Instance.GameOver();
     }
     public float GetEnvironmentEffect()
     {
@@ -57,24 +56,6 @@ public class DrugEffectManager : MonoBehaviour
     }
 
     //wird aufgerufen vom Skript CollectableItemManager-Skript, timeToAdd wird dabei vom Skript mitgegeben
-    public void IncreaseTimer(float timeToAdd)
-    {
-        // Erhöht den Timer um die gegebene Menge
-        
-        timer += timeToAdd;
-        
-
-        // Stellt sicher, dass der Timer nicht größer als die maximale Zeit ist
-        timer = Mathf.Min(timer, maxTime);
-
-        // Aktualisiert die Anzeige des Sliders
-        
-        timerSlider.value = timer;
-        
-        //timerSlider.maxValue = maxTime;
-       
-
-        //DIESES SKRIPT MUSS AN DEN PLAYER, NICHT AN DER DRUGEFFECTBAR SELBST!!!!!!
-    }
+    public void IncreaseTimer(float timeToAdd) => this.addTime += timeToAdd;
 }
 
