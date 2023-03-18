@@ -8,8 +8,8 @@ using TMPro;
 public class ScoreManager : MonoBehaviour
 {
     public static ScoreManager instance;
-    public TextMeshProUGUI scoreText; //Variable für Text UI Dingsbums nh
-    private int score; //Score halt, gibt nix zu erklären ja
+    public TextMeshProUGUI scoreText; //Variable fï¿½r Text UI Dingsbums nh
+    private int score; //Score halt, gibt nix zu erklï¿½ren ja
 
     void Awake()
     {
@@ -17,17 +17,12 @@ public class ScoreManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
+            scoreText.text = "Score: " + score.ToString();
         }
         else
         {
             Destroy(gameObject);
         }
-    }
-
-    //Score Text aktualisieren
-    void Update()
-    {
-        scoreText.text = "Score: " + score.ToString();
     }
 
     //Score addieren zu aktuellen Punkten
@@ -36,6 +31,7 @@ public class ScoreManager : MonoBehaviour
         Debug.Log("davor: " + score);
         score += points;
         Debug.Log("danach: " + score);
+        scoreText.text = "Score: " + score.ToString();
     }
 
     //Score bekommen
