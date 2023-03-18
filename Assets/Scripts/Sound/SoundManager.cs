@@ -18,15 +18,11 @@ public class SoundManager : MonoBehaviour
 
     private float musicTotalVolumeBuffer = 0;
 
-    private void Awake()
-    {
-        if(Instance == null)
-        {
+    private void Awake() {
+        if(Instance == null){
             Instance = this;
             DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
+        }else{
             Destroy(gameObject);
         }
     }
@@ -34,6 +30,14 @@ public class SoundManager : MonoBehaviour
     private void Start()
     {
         if(Instance == this){
+            //~ load audio settings
+            GameManager.Instance.LoadAudioSettings(
+                true,
+                out bool _,
+                out float _,
+                out float _,
+                out float _
+            );
             PlayMusic("Light");
             PlayMusic("Dark");
         }
