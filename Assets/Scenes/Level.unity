@@ -709,6 +709,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &922027165 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3249486554375303846, guid: 93fb03f287c7efc47b0e20440698f1ac, type: 3}
+  m_PrefabInstance: {fileID: 922027161}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &1047510092 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 9086940904961400639, guid: 1689b4a1c320ec8408350c3397416d85, type: 3}
@@ -2115,6 +2120,10 @@ PrefabInstance:
       propertyPath: highScoreText
       value: 
       objectReference: {fileID: 922027164}
+    - target: {fileID: 8148698733135783551, guid: 6bbc1b9582f8a5a43ac0fc9d6c0b7e58, type: 3}
+      propertyPath: highScoreTrophy
+      value: 
+      objectReference: {fileID: 922027165}
     - target: {fileID: 8286873205584783328, guid: 6bbc1b9582f8a5a43ac0fc9d6c0b7e58, type: 3}
       propertyPath: m_RootOrder
       value: 4
