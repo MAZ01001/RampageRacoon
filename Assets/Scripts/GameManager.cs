@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class GameManager : MonoBehaviour {
     //~ inspector (private)
@@ -7,9 +8,13 @@ public class GameManager : MonoBehaviour {
     [SerializeField][Tooltip("The in-game menu HUD")] private GameObject pauseMenu;
     [SerializeField][Tooltip("The in-game settings HUD")] private GameObject menuSettings;
     [SerializeField][Tooltip("The in-game game over HUD")] private GameObject gameOver;
+    [SerializeField][Tooltip("The highscore UI text")] private TMP_Text highScoreText;
     //~ inspector (public)
     [Header("Player")]
     [SerializeField][Tooltip("The player in scene")] public PlayerManager Player;
+
+    //~ private
+    private int highscore = 0;
 
     //~ static (public)
     public static GameManager Instance { get; private set; }
@@ -20,14 +25,8 @@ public class GameManager : MonoBehaviour {
             //~ first start of game
             Application.targetFrameRate = 60;
             QualitySettings.vSyncCount = 1;
-            //~ load audio settings
-            this.LoadAudioSettings(
-                true,
-                out bool _,
-                out float _,
-                out float _,
-                out float _
-            );
+            //~ load highscore
+            this.highscore = PlayerPrefs.GetInt("Highscore", 0);
         }
         GameManager.Instance = this;
     }
@@ -46,6 +45,13 @@ public class GameManager : MonoBehaviour {
     /// <summary> Activates <see cref="gameover"/> (in-game HUD) and freezes time </summary>
     public void GameOver() {
         GameManager.PauseTime(true);
+        int score = ScoreManager.instance.GetScore();
+        if(score > this.highscore){
+            this.highScoreText.text = $"New Highscore\n{score}";
+            this.highscore = score;
+            PlayerPrefs.SetInt("Highscore", this.highscore);
+            PlayerPrefs.Save();
+        }else this.highScoreText.text = $"Score\n{score}\n\nHighscore\n{this.highscore}";
         this.gameOver.SetActive(true);
     }
 
