@@ -18,8 +18,8 @@ public class EnemySpawner : MonoBehaviour {
     //~ private
     private Coroutine spawnRoutine;
     private GameObject emptyParent = null;
-    private Vector2 spawnAreaMin = Vector2.zero;
-    private Vector2 spawnAreaMax = Vector2.zero;
+    private Vector2 spawnAreaPos = Vector2.zero;
+    private Vector2 spawnAreaExtends = Vector2.zero;
     private float spriteMaxWidth = 0f;
     private int enemyCounter = 0;
 
@@ -63,26 +63,26 @@ public class EnemySpawner : MonoBehaviour {
             yield return new WaitUntil(() => this.enemyCounter < this.maxEnemyCount);
             //~ set random position (outside camera view)
             cameraXRight = Camera.main.transform.position.x + this.cameraWidth * 0.5f;
-            spawnLeft = Mathf.Abs(this.spawnAreaMax.x - cameraXRight) > this.spriteMaxWidth;
+            spawnLeft = Mathf.Abs((this.spawnAreaPos.x + this.spawnAreaExtends.x) - cameraXRight) > this.spriteMaxWidth;
             cameraXLeft = Camera.main.transform.position.x - this.cameraWidth * 0.5f;
-            spawnRight = Mathf.Abs(this.spawnAreaMin.x - cameraXLeft) > this.spriteMaxWidth;
+            spawnRight = Mathf.Abs((this.spawnAreaPos.x - this.spawnAreaExtends.x) - cameraXLeft) > this.spriteMaxWidth;
             if(spawnLeft){
                 if(spawnRight) //~ random left or right
                     pos = new Vector2(
                         Random.value > 0.5f
-                            ? Random.Range(cameraXRight, this.spawnAreaMax.x)
-                            : Random.Range(this.spawnAreaMin.x, cameraXLeft),
-                        Random.Range(this.spawnAreaMin.y, this.spawnAreaMax.y)
+                            ? Random.Range(cameraXRight, this.spawnAreaPos.x + this.spawnAreaExtends.x)
+                            : Random.Range(this.spawnAreaPos.x - this.spawnAreaExtends.x, cameraXLeft),
+                        this.spawnAreaPos.y + Random.Range(-this.spawnAreaExtends.y, this.spawnAreaExtends.y)
                     );
                 else //~ left
                     pos = new Vector2(
-                        Random.Range(this.spawnAreaMin.x, cameraXLeft),
-                        Random.Range(this.spawnAreaMin.y, this.spawnAreaMax.y)
+                        Random.Range(this.spawnAreaPos.x - this.spawnAreaExtends.x, cameraXLeft),
+                        this.spawnAreaPos.y + Random.Range(-this.spawnAreaExtends.y, this.spawnAreaExtends.y)
                     );
             }else if(spawnRight) //~ right
                 pos = new Vector2(
-                    Random.Range(cameraXRight, this.spawnAreaMax.x),
-                    Random.Range(this.spawnAreaMin.y, this.spawnAreaMax.y)
+                    Random.Range(cameraXRight, this.spawnAreaPos.x + this.spawnAreaExtends.x),
+                    this.spawnAreaPos.y + Random.Range(-this.spawnAreaExtends.y, this.spawnAreaExtends.y)
                 );
             else continue;
             enemy = Object.Instantiate<GameObject>(
@@ -98,11 +98,11 @@ public class EnemySpawner : MonoBehaviour {
 
     //~ public methods
     /// <summary> Start spawning </summary>
-    /// <param name="spawnAreaMin"> Lower left corner of spawn area </param>
-    /// <param name="spawnAreaMax"> Top right corner of spawn area </param>
-    public void StartSpawning(in Vector2 spawnAreaMin, in Vector2 spawnAreaMax){
-        this.spawnAreaMin = spawnAreaMin;
-        this.spawnAreaMax = spawnAreaMax;
+    /// <param name="spawnAreaPos"> world position of spawn area </param>
+    /// <param name="spawnAreaExtends"> world space extends of spawn area (extend is half the size) </param>
+    public void StartSpawning(in Vector2 spawnAreaPos, in Vector2 spawnAreaExtends){
+        this.spawnAreaPos = spawnAreaPos;
+        this.spawnAreaExtends = spawnAreaExtends;
         this.StopSpawning();
         this.spawnRoutine = StartCoroutine(this.EnemySpawning());
     }

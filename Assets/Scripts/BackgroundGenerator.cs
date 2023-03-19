@@ -62,8 +62,8 @@ public class BackgroundGenerator : MonoBehaviour {
 
     //~ private
     private Vector2 backgroundSize = Vector2.zero;
-    private Vector2 spawnAreaMin = Vector2.zero;
-    private Vector2 spawnAreaMax = Vector2.zero;
+    private Vector2 spawnAreaPos = Vector2.zero;
+    private Vector2 spawnAreaExtends = Vector2.zero;
 
     //~ unity methods (private)
     private void OnDrawGizmosSelected() {
@@ -122,27 +122,29 @@ public class BackgroundGenerator : MonoBehaviour {
             pos += Vector2.right * this.backgroundSize.x;
         }
         //~ calculate spawn area and generate colliders
-        this.spawnAreaMin = (Vector2)this.transform.position
-            + Vector2.down * (this.backgroundSize.y * 0.5f)
-            + Vector2.left * (this.backgroundSize.x * (float)(this.backgroundCount - 1) * 0.5f - 0.5f);
-        this.spawnAreaMax = (Vector2)this.transform.position
-            + Vector2.up * this.groundYstart
-            + Vector2.right * (this.backgroundSize.x * (float)(this.backgroundCount - 1) * 0.5f - 0.5f);
+        this.spawnAreaPos = new Vector2(
+            this.transform.position.x,
+            (this.transform.position.y + this.groundYstart) - (this.backgroundSize.y * 0.5f + this.groundYstart) * 0.5f
+        );
+        this.spawnAreaExtends = new Vector2(
+            this.backgroundSize.x * (float)(this.backgroundCount - 1) - 1,
+            this.backgroundSize.y * 0.5f + this.groundYstart
+        ) * 0.5f;
         //~ >> top border
         BoxCollider2D box = emptyParent.AddComponent<BoxCollider2D>();
-        box.offset = Vector2.up * (this.spawnAreaMax.y + 0.5f);
+        box.offset = Vector2.up * ((this.spawnAreaPos.y - this.transform.position.y) + this.spawnAreaExtends.y + 0.5f);
         box.size = new Vector2(this.backgroundSize.x * (float)(this.backgroundCount - 1) * 1.1f, 1f);
         //~ >> bottom border
         box = emptyParent.AddComponent<BoxCollider2D>();
-        box.offset = Vector2.up * (this.spawnAreaMin.y - 0.5f);
+        box.offset = Vector2.up * ((this.spawnAreaPos.y - this.transform.position.y) - (this.spawnAreaExtends.y + 0.5f));
         box.size = new Vector2(this.backgroundSize.x * (float)(this.backgroundCount - 1) * 1.1f, 1f);
         //~ >> left border
         box = emptyParent.AddComponent<BoxCollider2D>();
-        box.offset = Vector2.right * (this.spawnAreaMin.x - 0.5f);
+        box.offset = Vector2.right * ((this.spawnAreaPos.x - this.transform.position.x) - (this.spawnAreaExtends.x + 0.5f));
         box.size = new Vector2(1f, this.backgroundSize.y * 1.1f);
         //~ >> right border
         box = emptyParent.AddComponent<BoxCollider2D>();
-        box.offset = Vector2.right * (this.spawnAreaMax.x + 0.5f);
+        box.offset = Vector2.right * ((this.spawnAreaPos.x - this.transform.position.x) + this.spawnAreaExtends.x + 0.5f);
         box.size = new Vector2(1f, this.backgroundSize.y * 1.1f);
         //~ generate foreground props
         if(this.foregroundSprites.Length > 0){
@@ -151,9 +153,9 @@ public class BackgroundGenerator : MonoBehaviour {
             emptyParent.transform.localPosition = Vector3.zero;
             WeightedRandom.SortWeightList(this.foregroundSprites);
             for(int i = 0; i < this.foregroundCount; i++){
-                pos = new Vector2(
-                    Random.Range(this.spawnAreaMin.x, this.spawnAreaMax.x),
-                    Random.Range(this.spawnAreaMin.y, this.spawnAreaMax.y)
+                pos = (this.spawnAreaPos - (Vector2)this.transform.position) + new Vector2(
+                    Random.Range(-this.spawnAreaExtends.x, this.spawnAreaExtends.x),
+                    Random.Range(-this.spawnAreaExtends.y, this.spawnAreaExtends.y)
                 );
                 //~ get random index
                 float rValue = Random.value;
@@ -170,7 +172,7 @@ public class BackgroundGenerator : MonoBehaviour {
         //~ restore random state
         Random.state = rState;
         //~ start spawning enemies
-        this.GetComponent<EnemySpawner>()?.StartSpawning(this.spawnAreaMin, this.spawnAreaMax);
+        this.GetComponent<EnemySpawner>()?.StartSpawning(this.spawnAreaPos, this.spawnAreaExtends);
     }
 
 #if UNITY_EDITOR
