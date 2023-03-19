@@ -18,7 +18,6 @@ public class WeaponManager : MonoBehaviour {
         sprite = GetComponent<SpriteRenderer>();
     }
     private void FixedUpdate() {
-        // TODO gun look to mouse / arrow keys / bumpers
         sprite.flipX = playerManager.IsFacingRight != this.facingRight;
     }
 
