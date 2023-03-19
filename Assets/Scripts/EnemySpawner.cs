@@ -63,9 +63,9 @@ public class EnemySpawner : MonoBehaviour {
             yield return new WaitUntil(() => this.enemyCounter < this.maxEnemyCount);
             //~ set random position (outside camera view)
             cameraXRight = Camera.main.transform.position.x + this.cameraWidth * 0.5f;
-            spawnLeft = Mathf.Abs((this.spawnAreaPos.x + this.spawnAreaExtends.x) - cameraXRight) > this.spriteMaxWidth;
+            spawnRight = ((this.spawnAreaPos.x + this.spawnAreaExtends.x) - cameraXRight) > this.spriteMaxWidth;
             cameraXLeft = Camera.main.transform.position.x - this.cameraWidth * 0.5f;
-            spawnRight = Mathf.Abs((this.spawnAreaPos.x - this.spawnAreaExtends.x) - cameraXLeft) > this.spriteMaxWidth;
+            spawnLeft = (cameraXLeft - (this.spawnAreaPos.x - this.spawnAreaExtends.x)) > this.spriteMaxWidth;
             if(spawnLeft){
                 if(spawnRight) //~ random left or right
                     pos = new Vector2(
