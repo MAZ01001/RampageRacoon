@@ -4978,9 +4978,9 @@ MonoBehaviour:
   maxHealth: 2
   itemPrefab: {fileID: 1146562849004431163, guid: e3ee20f7c26a21046be33a7f94f362c5, type: 3}
   dropChance: 0.8
-  detectRange: 12
+  detectRange: 11
   damage: 1
-  attackRange: 2
+  attackRange: 2.25
   particle: {fileID: 5867769852233622018}
   damageEffectDecay: 0.5
   OnDie:
@@ -4999,8 +4999,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -1.7331179, y: -0.70712143}
-  m_Size: {x: 10.061924, y: 2.3126163}
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 2, y: 0.5}
   m_Direction: 1
 --- !u!50 &6710582590712833472
 Rigidbody2D:

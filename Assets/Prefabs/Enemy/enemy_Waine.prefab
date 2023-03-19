@@ -4978,9 +4978,9 @@ MonoBehaviour:
   maxHealth: 4
   itemPrefab: {fileID: 1146562849004431163, guid: e3ee20f7c26a21046be33a7f94f362c5, type: 3}
   dropChance: 1
-  detectRange: 12
+  detectRange: 9
   damage: 1
-  attackRange: 2
+  attackRange: 1.75
   particle: {fileID: 4307179472045146631}
   damageEffectDecay: 0.5
   OnDie:

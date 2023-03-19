@@ -73,10 +73,11 @@ public class Enemy : MonoBehaviour
             StartCoroutine(GameManager.Instance.Player.Damage(damage));
         }
         //~ flip sprite
-        if (rb.velocity.x > 0) sprite.flipX = this.facingRight;
-        else if (rb.velocity.x < 0) sprite.flipX = !this.facingRight;
+        if (rb.velocity.x > 0) sprite.flipX = !this.facingRight;
+        else if (rb.velocity.x < 0) sprite.flipX = this.facingRight;
         //~ set animator values
-        anim.SetFloat("Speed", alive ? rb.velocity.magnitude : 0f);
+        // TODO change this in the future
+        anim.SetFloat("Speed", alive && inRange ? 1f : 0f);
         //Damage Animation
         timer -= Time.fixedDeltaTime;
         dTimer = Mathf.Lerp(1, 0, timer / damageEffectDecay);
