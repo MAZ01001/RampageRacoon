@@ -1,12 +1,20 @@
 # Rampage Racoon
 
-A 2D game in the Unity game engine
+A 2D game in the Unity game engine.
+
+<a href="https://maz01001.itch.io/rampage-racoon" title="view Rampage Racoon on itch.io">
+    <img style="width:80rem;" src="https://img.itch.zone/aW1nLzExNjA4NTA1LnBuZw==/original/e%2Ft2y4.png" alt="Rampage Racoon banner image"/>
+</a>
+
+view [Rampage Racoon on itch.io](https://maz01001.itch.io/rampage-racoon "view Rampage Racoon on itch.io").
 
 ## Description
 
 >
 > You play as a (drugged) raccoon and shoot bubbles to share the joy,
 > but watch out because fewer pills, and you might get aware of what's actually happening to those around you.
+>
+> __Trigger warning: substance abuse, blood, cartoon violence.__
 >
 
 ## Controls
