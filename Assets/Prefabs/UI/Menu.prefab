@@ -1056,8 +1056,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Rampage Racoon
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 5ff6ef492a5b5a04baa9af4ad48c846b, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 5ff6ef492a5b5a04baa9af4ad48c846b, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: a2ce1a36f83f3b045ab7d6034efbac3a, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: a2ce1a36f83f3b045ab7d6034efbac3a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
