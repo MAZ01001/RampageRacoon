@@ -127,8 +127,8 @@ public class PlayerManager : MonoBehaviour {
             this.moveSmooth
         );
         //~ player facing direction (only change while moving)
-        if(Input.mousePosition.x > Screen.width/2) this.spriteRenderer.flipX = !this.facingRight;
-        else if(Input.mousePosition.x < Screen.width/2) this.spriteRenderer.flipX = this.facingRight;
+        if(Input.mousePosition.x > Screen.width * 0.5f) this.spriteRenderer.flipX = !this.facingRight;
+        else if(Input.mousePosition.x < Screen.width * 0.5f) this.spriteRenderer.flipX = this.facingRight;
         //~ update animator values
         weaponAnim.SetBool("Firing", this.inputManager.shoot);
     }
