@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour {
             //~ load highscore
             this.highscore = PlayerPrefs.GetInt("Highscore", 0);
         }
+        GameManager.PauseTime(false);
         GameManager.Instance = this;
     }
 

@@ -44,6 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7559209c6cd35049a22c3847175bdd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  localMenu: {fileID: 0}
+  pauseMenu: {fileID: 0}
+  menuSettings: {fileID: 0}
   gameOver: {fileID: 0}
+  highScoreText: {fileID: 0}
+  highScoreTrophy: {fileID: 0}
   Player: {fileID: 0}
