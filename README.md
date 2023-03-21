@@ -8,6 +8,10 @@ A 2D game in the Unity game engine.
 
 view [Rampage Racoon on itch.io](https://maz01001.itch.io/rampage-racoon "view Rampage Racoon on itch.io").
 
+>
+> original repo: https://github.com/GameDevWeek-2023/ON_MafiaBear.
+>
+
 ## Description
 
 >
